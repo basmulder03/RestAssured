@@ -19,7 +19,7 @@ across client and server so a small team (or one person plus agents) can maintai
 | Concern | Choice | Licence | Notes |
 |---|---|---|---|
 | Language | TypeScript (strict) | Apache-2.0 | |
-| Runtime | Node.js 24 LTS | MIT | Upgrade to each new Active LTS. |
+| Runtime | Node.js 26 (LTS from October 2026) | MIT | Pinned in `.nvmrc` and `engines`. Upgrade to each new LTS. Node ≥ 25 no longer bundles Corepack; install it with `npm i -g corepack` (MIT). |
 | Framework | SvelteKit 2 + Svelte 5 | MIT | SSR, form actions that work without JS, small client bundles. |
 | Adapter | `@sveltejs/adapter-node` | MIT | Single Node process behind a reverse proxy. |
 | Package manager | pnpm | MIT | Lockfile committed; `pnpm-workspace.yaml` (app at root, `docs/` as a workspace package). |

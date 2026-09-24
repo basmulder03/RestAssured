@@ -37,7 +37,7 @@ Core ideas:
 
 ## Stack (ADR-0008)
 
-SvelteKit 2 + Svelte 5 (`adapter-node`), TypeScript strict, Node.js 24 LTS, pnpm, PostgreSQL ≥ 16
+SvelteKit 2 + Svelte 5 (`adapter-node`), TypeScript strict, Node.js 26 LTS, pnpm, PostgreSQL ≥ 16
 via `pg` + Kysely, plain `.sql` migrations, Valibot, Vitest, Playwright, VitePress for docs.
 See ADR-0008 for the full, licence-checked list. Anything not listed there needs justification.
 

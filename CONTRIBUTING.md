@@ -22,13 +22,16 @@ Thanks for helping music clubs keep track of their gear!
 
 ## Development setup
 
-Setup instructions will follow once the application scaffold lands. You'll need Node.js 24 LTS,
-pnpm, and Docker Engine or Podman for a local PostgreSQL.
+Setup instructions will follow once the application scaffold lands. You'll need Node.js 26
+(pinned in `.nvmrc`), pnpm (pinned via `packageManager` in `package.json`), and Docker Engine or
+Podman for a local PostgreSQL.
 
 Docs site only:
 
 ```sh
-corepack enable
+nvm install              # or any Node 26 install
+npm install -g corepack  # Node >= 25 no longer bundles Corepack
+corepack enable          # already have a global pnpm? use `npm i -g pnpm@10` instead
 pnpm install
 pnpm docs:dev
 ```

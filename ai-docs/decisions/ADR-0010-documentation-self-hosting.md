@@ -59,7 +59,7 @@ without wading through comment noise.
 
 ### 4. Self-hosting model
 
-- **Artifact:** one container image (multi-stage `Dockerfile`, non-root user, Node 24 slim base)
+- **Artifact:** one container image (multi-stage `Dockerfile`, non-root user, Node 26 slim base)
   plus PostgreSQL. A reference `compose.yaml` includes `app`, `postgres`, and optionally `caddy`
   (Apache-2.0) for automatic TLS.
 - **Also supported:** running with plain Node + an existing Postgres (documented, not the default).

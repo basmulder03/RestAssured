@@ -10,7 +10,7 @@ instance and for every self-hoster. You also guard licence compliance.
   ADR-0005 §5 (backups and erasure replay)
 
 ## Responsibilities
-1. **Container:** multi-stage `Dockerfile` (Node 24 slim, non-root, `HEALTHCHECK`, no dev
+1. **Container:** multi-stage `Dockerfile` (Node 26 slim, non-root, `HEALTHCHECK`, no dev
    dependencies, reproducible from lockfile). Reference `compose.yaml` with `app`, `postgres`, and
    optional `caddy`.
 2. **Database roles & bootstrap:** SQL for `ra_owner`/`ra_app` roles, migration-on-start with an
