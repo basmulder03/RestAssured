@@ -1,4 +1,7 @@
 {
   "suspended": "Deze vereniging is opgeschort. Je kunt gegevens bekijken maar niet wijzigen.",
-  "dashboard_placeholder": "Het materiaaloverzicht komt hier binnenkort."
+  "dashboard_placeholder": "Het materiaaloverzicht komt hier binnenkort.",
+  "nav_label": "Vereniging",
+  "overview": "Overzicht",
+  "errors.not_writable": "Deze vereniging is opgeschort; wijzigingen zijn niet mogelijk."
 }
