@@ -33,7 +33,9 @@ jobs:
           curl -fsSLo "$archive" "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/${archive}"
           echo "${ACTIONLINT_SHA256}  ${archive}" | sha256sum -c -
           tar -xzf "$archive" actionlint
-      - run: ./actionlint -color
+      # actionlint doesn't know GitHub's `uses: $/…` self-repository syntax yet
+      # (rhysd/actionlint#711); drop this -ignore once a release supports it.
+      - run: ./actionlint -color -ignore 'specifying action "\$/'
 
   zizmor:
     runs-on: ubuntu-latest
