@@ -1,4 +1,7 @@
 {
   "suspended": "This club is suspended. You can view data but not change it.",
-  "dashboard_placeholder": "The inventory overview will appear here soon."
+  "dashboard_placeholder": "The inventory overview will appear here soon.",
+  "nav_label": "Club",
+  "overview": "Overview",
+  "errors.not_writable": "This club is suspended; changes are not possible."
 }
