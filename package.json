@@ -1,0 +1,14 @@
+{
+  "name": "restassured",
+  "private": true,
+  "license": "AGPL-3.0-or-later",
+  "packageManager": "pnpm@10.17.1",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "docs:dev": "pnpm --filter restassured-docs dev",
+    "docs:build": "pnpm --filter restassured-docs build",
+    "docs:preview": "pnpm --filter restassured-docs preview"
+  }
+}

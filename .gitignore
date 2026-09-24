@@ -1,0 +1,29 @@
+node_modules/
+.pnpm-store/
+
+# SvelteKit / Vite
+.svelte-kit/
+build/
+.vite/
+
+# Docs
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+docs/architecture/decisions/
+
+# Tests
+coverage/
+playwright-report/
+test-results/
+
+# Env & local data
+.env
+.env.*
+!.env.example
+*.local
+data/
+
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
