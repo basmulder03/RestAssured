@@ -1,54 +1,61 @@
-# Builds the docs on every push/PR; deploys to GitHub Pages from main (ADR-0010, ADR-0011).
+# Builds the docs on every PR (required check) and deploys to GitHub Pages from main (ADR-0010, ADR-0011).
 # Documentation publishing is not an application deployment.
+# Actions are pinned to full commit SHAs; Dependabot keeps them current.
 name: Docs
 
 on:
   push:
     branches: [main]
-    paths: ['docs/**', 'ai-docs/decisions/**', 'package.json', 'pnpm-lock.yaml', '.github/workflows/docs.yml']
+    paths: ['docs/**', 'ai-docs/decisions/**', 'package.json', 'pnpm-lock.yaml', 'pnpm-workspace.yaml', '.nvmrc', '.github/workflows/docs.yml']
   pull_request:
-    paths: ['docs/**', 'ai-docs/decisions/**', 'package.json', 'pnpm-lock.yaml', '.github/workflows/docs.yml']
   workflow_dispatch:
 
-permissions:
-  contents: read
-
-concurrency:
-  group: docs-${{ github.ref }}
-  cancel-in-progress: true
+permissions: {}
 
 jobs:
-  build:
+  docs-build:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    concurrency:
+      group: docs-build-${{ github.ref }}
+      cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0 # lastUpdated timestamps
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
+          persist-credentials: false
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+      # No dependency cache: this workflow publishes, and caches are a poisoning vector.
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: .nvmrc
-          cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm docs:build
         env:
           DOCS_BASE: /${{ github.event.repository.name }}/
           DOCS_REPO_URL: ${{ github.server_url }}/${{ github.repository }}
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         with:
           path: docs/.vitepress/dist
 
   deploy:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-    needs: build
+    needs: docs-build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       pages: write
       id-token: write
+    # Never cancel a running Pages deployment.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
