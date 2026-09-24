@@ -1,0 +1,17 @@
+{
+  "title": "Mijn account",
+  "welcome": "Welkom! Je account is klaar. Je kunt hieronder een wachtwoord instellen, maar dat hoeft niet: je kunt ook steeds met een link inloggen.",
+  "signed_in_as": "Ingelogd als {email}.",
+  "scoped_notice": "Je bent ingelogd via een link van de beheerder van één vereniging. Daarom zie je nu alleen die vereniging.",
+  "change_password": "Wachtwoord wijzigen",
+  "set_password": "Wachtwoord instellen",
+  "password_optional": "Optioneel: zonder wachtwoord log je in met een link van je beheerder.",
+  "current_password": "Huidig wachtwoord",
+  "new_password": "Nieuw wachtwoord",
+  "confirm_password": "Herhaal nieuw wachtwoord",
+  "password_rules": "Minstens 12 tekens. Een zin van een paar woorden werkt goed.",
+  "password_saved": "Je wachtwoord is opgeslagen. Je bent op andere apparaten uitgelogd.",
+  "language": "Taal",
+  "language_saved": "Je taalvoorkeur is opgeslagen.",
+  "language_auto": "Automatisch (vereniging of browser)"
+}

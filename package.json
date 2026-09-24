@@ -9,7 +9,8 @@
   },
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
+    "build": "vite build && pnpm build:cli",
+    "build:cli": "esbuild scripts/cli.ts --bundle --platform=node --format=esm --target=node26 --packages=external --outfile=build/cli.js --log-level=warning",
     "preview": "vite preview",
     "start": "node build",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --fail-on-warnings",
@@ -21,18 +22,21 @@
     "db:up": "tsx scripts/dev-db.ts up",
     "db:down": "tsx scripts/dev-db.ts down",
     "db:reset": "tsx scripts/dev-db.ts reset",
-    "db:bootstrap": "tsx scripts/bootstrap.ts",
-    "db:migrate": "tsx scripts/migrate.ts",
+    "db:bootstrap": "tsx scripts/cli.ts bootstrap",
+    "db:migrate": "tsx scripts/cli.ts migrate",
     "db:codegen": "kysely-codegen --dialect postgres --url 'env(RA_DATABASE_OWNER_URL)' --out-file src/lib/server/db/schema.d.ts --exclude-pattern schema_migrations --log-level error && prettier --write --ignore-path '' src/lib/server/db/schema.d.ts",
     "i18n:lint": "tsx scripts/i18n-lint.ts",
     "licenses:check": "node scripts/check-licenses.mjs",
     "docs:dev": "pnpm --filter restassured-docs dev",
     "docs:build": "pnpm --filter restassured-docs build",
-    "docs:preview": "pnpm --filter restassured-docs preview"
+    "docs:preview": "pnpm --filter restassured-docs preview",
+    "cli": "tsx scripts/cli.ts"
   },
   "dependencies": {
+    "@node-rs/argon2": "^2.2.1",
     "kysely": "^0.29.6",
     "pg": "^8.23.0",
+    "qrcode": "^1.5.4",
     "valibot": "^1.5.0"
   },
   "devDependencies": {
@@ -42,6 +46,8 @@
     "@sveltejs/vite-plugin-svelte": "^7.3.1",
     "@types/node": "^26.6.2",
     "@types/pg": "^8.23.1",
+    "@types/qrcode": "^1.5.6",
+    "esbuild": "^0.28.2",
     "eslint": "^10.11.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-svelte": "^3.23.0",

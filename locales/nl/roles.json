@@ -1,0 +1,7 @@
+{
+  "tenant_admin": "Beheerder",
+  "board_member": "Bestuurslid",
+  "quartermaster": "Materiaalbeheerder",
+  "instrument_manager": "Instrumentbeheerder",
+  "viewer": "Meekijker"
+}

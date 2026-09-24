@@ -2,5 +2,14 @@
   "not_found": "Deze pagina bestaat niet.",
   "forbidden": "Je hebt geen toegang tot deze pagina.",
   "internal": "Er ging iets mis. Probeer het later opnieuw.",
-  "back_home": "Naar de startpagina"
+  "back_home": "Naar de startpagina",
+  "rate_limited": "Te veel pogingen. Wacht even en probeer het opnieuw.",
+  "invalid": "Deze waarde is ongeldig.",
+  "required": "Dit veld is verplicht.",
+  "too_long": "Deze waarde is te lang.",
+  "email_invalid": "Vul een geldig e-mailadres in.",
+  "password.too_short": "Een wachtwoord moet minstens 12 tekens lang zijn.",
+  "password.too_long": "Een wachtwoord mag maximaal 256 tekens lang zijn.",
+  "password.contains_email": "Gebruik je e-mailadres niet in je wachtwoord.",
+  "password.mismatch": "De wachtwoorden komen niet overeen."
 }

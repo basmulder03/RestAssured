@@ -15,11 +15,28 @@ export async function withTenant<T>(
 ): Promise<T> {
 	if (!UUID.test(tenantId)) throw new Error('withTenant: tenantId must be a UUID');
 	return db.transaction().execute(async (trx) => {
-		// ADR-0001: is_local = true scopes the setting to this transaction, so a pooled
-		// connection can never carry one tenant's context into another request.
-		await sql`SELECT set_config('app.tenant_id', ${tenantId}, true)`.execute(trx);
+		await setTenant(trx, tenantId);
 		return fn(trx);
 	});
+}
+
+/**
+ * Switches the tenant context inside an existing transaction, for flows that span a global
+ * table and a tenant table atomically (e.g. accepting an invite). Prefer `withTenant`.
+ */
+export async function setTenant(trx: Transaction<DB>, tenantId: string): Promise<void> {
+	if (!UUID.test(tenantId)) throw new Error('setTenant: tenantId must be a UUID');
+	// ADR-0001: is_local = true scopes the setting to this transaction, so a pooled
+	// connection can never carry one tenant's context into another request.
+	await sql`SELECT set_config('app.tenant_id', ${tenantId}, true)`.execute(trx);
+}
+
+/** Tenants where the user holds the Tenant Admin system role (ADR-0004 §4 guard). */
+export async function userAdminTenants(db: Kysely<DB>, userId: string): Promise<string[]> {
+	if (!UUID.test(userId)) throw new Error('userAdminTenants: userId must be a UUID');
+	const { rows } = await sql<{ id: string }>`
+		SELECT ra_user_admin_tenants AS id FROM ra_user_admin_tenants(${userId})`.execute(db);
+	return rows.map((r) => r.id);
 }
 
 export type UserMembership = {

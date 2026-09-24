@@ -1,0 +1,22 @@
+{
+  "invalid_title": "Link not valid",
+  "errors.invalid": "This link has expired, has already been used, or is not valid. Ask your admin for a new link.",
+  "errors.already_linked": "This invitation has already been accepted.",
+  "errors.invite_sign_in_first": "An account with this email address already exists. Sign in with that account first, then open the link again.",
+  "errors.invite_sign_out_first": "You are signed in with a different account. Sign out first, then open the link again.",
+  "errors.already_member": "Your account is already a member of this club.",
+  "login_title": "Sign in with a link",
+  "login_body": "This link can be used once.",
+  "reset_title": "Set a new password",
+  "reset_submit": "Save password and sign in",
+  "invite_title": "Invitation to {club}",
+  "invite_body": "You have been invited as {name} ({email}) to manage the club's inventory.",
+  "invite_signed_in_as": "You are signed in as {email}.",
+  "invite_accept": "Accept invitation",
+  "share.label": "One-time link",
+  "share.copy": "Copy link",
+  "share.copied": "Copied",
+  "share.qr_label": "QR code of the link",
+  "share.expires": "Valid until {date}. Works only once.",
+  "share.warning": "Whoever has this link can use it. Give it to the right person in person or in a private message. This link is shown only once."
+}
