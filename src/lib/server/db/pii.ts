@@ -18,6 +18,7 @@ export const PII_TABLES = {
 			'last_tenant_id',
 			'email_verified_at',
 			'erased_at',
+			'credential_scope_tenant_id',
 			'created_at',
 			'updated_at'
 		]

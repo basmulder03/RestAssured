@@ -2,5 +2,14 @@
   "not_found": "This page doesn't exist.",
   "forbidden": "You don't have access to this page.",
   "internal": "Something went wrong. Please try again later.",
-  "back_home": "Go to the home page"
+  "back_home": "Go to the home page",
+  "rate_limited": "Too many attempts. Please wait a moment and try again.",
+  "invalid": "This value is not valid.",
+  "required": "This field is required.",
+  "too_long": "This value is too long.",
+  "email_invalid": "Enter a valid email address.",
+  "password.too_short": "A password must be at least 12 characters long.",
+  "password.too_long": "A password can be at most 256 characters long.",
+  "password.contains_email": "Don't use your email address in your password.",
+  "password.mismatch": "The passwords don't match."
 }

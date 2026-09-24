@@ -1,0 +1,22 @@
+{
+  "invalid_title": "Link niet geldig",
+  "errors.invalid": "Deze link is verlopen, al gebruikt of ongeldig. Vraag je beheerder om een nieuwe link.",
+  "errors.already_linked": "Deze uitnodiging is al geaccepteerd.",
+  "errors.invite_sign_in_first": "Er bestaat al een account met dit e-mailadres. Log eerst in met dat account en open de link daarna opnieuw.",
+  "errors.invite_sign_out_first": "Je bent ingelogd met een ander account. Log eerst uit en open de link daarna opnieuw.",
+  "errors.already_member": "Je account is al lid van deze vereniging.",
+  "login_title": "Inloggen met link",
+  "login_body": "Deze link kan één keer gebruikt worden.",
+  "reset_title": "Nieuw wachtwoord instellen",
+  "reset_submit": "Wachtwoord opslaan en inloggen",
+  "invite_title": "Uitnodiging voor {club}",
+  "invite_body": "Je bent uitgenodigd als {name} ({email}) om het materiaal van de vereniging te beheren.",
+  "invite_signed_in_as": "Je bent ingelogd als {email}.",
+  "invite_accept": "Uitnodiging accepteren",
+  "share.label": "Eenmalige link",
+  "share.copy": "Link kopiëren",
+  "share.copied": "Gekopieerd",
+  "share.qr_label": "QR-code van de link",
+  "share.expires": "Geldig tot {date}. Werkt maar één keer.",
+  "share.warning": "Wie deze link heeft, kan hem gebruiken. Geef hem persoonlijk of via een privébericht aan de juiste persoon. Deze link wordt maar één keer getoond."
+}

@@ -38,6 +38,19 @@ export interface AuditLog {
 	tenant_id: string;
 }
 
+export interface AuthTokens {
+	consumed_at: Timestamp | null;
+	created_at: Generated<Timestamp>;
+	expires_at: Timestamp;
+	issued_by: string | null;
+	issued_in_tenant_id: string | null;
+	membership_id: string | null;
+	purpose: string;
+	target_tenant_id: string | null;
+	token_hash: Buffer;
+	user_id: string | null;
+}
+
 export interface MembershipRoles {
 	membership_id: string;
 	role_id: string;
@@ -61,6 +74,12 @@ export interface PlatformAuditLog {
 	subject_type: string;
 }
 
+export interface RateLimits {
+	hits: number;
+	key: string;
+	window_start: Timestamp;
+}
+
 export interface RolePermissions {
 	permission_code: string;
 	role_id: string;
@@ -76,6 +95,15 @@ export interface Roles {
 	tenant_id: string;
 	updated_at: Generated<Timestamp>;
 	version: Generated<number>;
+}
+
+export interface Sessions {
+	created_at: Generated<Timestamp>;
+	expires_at: Timestamp;
+	last_seen_at: Generated<Timestamp>;
+	scoped_tenant_id: string | null;
+	token_hash: Buffer;
+	user_id: string;
 }
 
 export interface TenantMemberships {
@@ -121,6 +149,7 @@ export interface ThemeSettings {
 
 export interface Users {
 	created_at: Generated<Timestamp>;
+	credential_scope_tenant_id: string | null;
 	email: string;
 	email_verified_at: Timestamp | null;
 	erased_at: Timestamp | null;
@@ -134,11 +163,14 @@ export interface Users {
 
 export interface DB {
 	audit_log: AuditLog;
+	auth_tokens: AuthTokens;
 	membership_roles: MembershipRoles;
 	permissions: Permissions;
 	platform_audit_log: PlatformAuditLog;
+	rate_limits: RateLimits;
 	role_permissions: RolePermissions;
 	roles: Roles;
+	sessions: Sessions;
 	tenant_memberships: TenantMemberships;
 	tenants: Tenants;
 	theme_settings: ThemeSettings;

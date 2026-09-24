@@ -71,6 +71,13 @@ No third-party email SaaS SDK is a dependency.
   an admin of each other tenant re-issuing). This prevents a club admin from taking over a
   person's account in another club.
 - Users with a `platform_role` cannot be reset by tenant admins at all.
+- **The scope sticks to the password.** A password set from a scoped session (for example through
+  an admin-issued reset link) records that scope in `users.credential_scope_tenant_id`, and
+  password logins inherit it. Otherwise the admin could set a password and then sign in normally
+  to escape the scope. The scope is cleared only when the password is set again from an
+  unscoped session: one created by a self-service link to the verified email address (once SMTP
+  is available) or by a Super Admin-issued login link. *(Clarification added 2026-09-24 during
+  implementation.)*
 
 ### 5. Sign-up
 

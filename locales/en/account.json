@@ -1,0 +1,17 @@
+{
+  "title": "My account",
+  "welcome": "Welcome! Your account is ready. You can set a password below, but you don't have to: you can also sign in with a link each time.",
+  "signed_in_as": "Signed in as {email}.",
+  "scoped_notice": "You signed in with a link from one club's admin, so you can only see that club for now.",
+  "change_password": "Change password",
+  "set_password": "Set a password",
+  "password_optional": "Optional: without a password you sign in with a link from your admin.",
+  "current_password": "Current password",
+  "new_password": "New password",
+  "confirm_password": "Repeat new password",
+  "password_rules": "At least 12 characters. A phrase of a few words works well.",
+  "password_saved": "Your password has been saved. You have been signed out on other devices.",
+  "language": "Language",
+  "language_saved": "Your language preference has been saved.",
+  "language_auto": "Automatic (club or browser)"
+}

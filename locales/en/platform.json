@@ -1,0 +1,23 @@
+{
+  "title": "Platform admin",
+  "new_club": "New club",
+  "no_clubs": "There are no clubs yet.",
+  "club_name": "Name",
+  "club_slug": "Web address",
+  "club_status": "Status",
+  "club_created": "Created",
+  "club_language": "Default language",
+  "status.provisioning": "Being set up",
+  "status.active": "Active",
+  "status.suspended": "Suspended",
+  "status.pending_deletion": "Pending deletion",
+  "slug_hint": "Lowercase letters, digits and hyphens, for example harmonie-oranje. Becomes part of the web address.",
+  "first_admin": "First admin",
+  "admin_name": "Name",
+  "create_club": "Create club",
+  "created_title": "{club} has been created",
+  "created_body": "Give this invitation link to {name}. With it they create an account and become the club's admin.",
+  "back_to_list": "Back to all clubs",
+  "errors.slug_invalid": "Use only lowercase letters, digits and hyphens (not at the start or end).",
+  "errors.slug_taken": "The web address \"{slug}\" is already taken."
+}

@@ -1,0 +1,23 @@
+{
+  "title": "Platformbeheer",
+  "new_club": "Nieuwe vereniging",
+  "no_clubs": "Er zijn nog geen verenigingen.",
+  "club_name": "Naam",
+  "club_slug": "Webadres",
+  "club_status": "Status",
+  "club_created": "Aangemaakt",
+  "club_language": "Standaardtaal",
+  "status.provisioning": "Wordt ingericht",
+  "status.active": "Actief",
+  "status.suspended": "Opgeschort",
+  "status.pending_deletion": "Wordt verwijderd",
+  "slug_hint": "Kleine letters, cijfers en streepjes, bijvoorbeeld harmonie-oranje. Wordt onderdeel van het webadres.",
+  "first_admin": "Eerste beheerder",
+  "admin_name": "Naam",
+  "create_club": "Vereniging aanmaken",
+  "created_title": "{club} is aangemaakt",
+  "created_body": "Geef deze uitnodigingslink aan {name}. Met de link maakt diegene een account aan en wordt beheerder van de vereniging.",
+  "back_to_list": "Terug naar alle verenigingen",
+  "errors.slug_invalid": "Gebruik alleen kleine letters, cijfers en streepjes (niet aan het begin of eind).",
+  "errors.slug_taken": "Het webadres \"{slug}\" is al in gebruik."
+}

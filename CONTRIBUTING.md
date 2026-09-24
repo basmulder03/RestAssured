@@ -35,8 +35,12 @@ cp .env.example .env
 pnpm db:up                  # PostgreSQL 18 on 127.0.0.1:54320 (RA_CONTAINER_CLI=podman for Podman)
 pnpm db:bootstrap           # roles ra_owner / ra_app + database (idempotent)
 pnpm db:migrate
+pnpm cli create-super-admin --email you@example.org   # prints a one-time login link
 pnpm dev
 ```
+
+Open the printed link, then create a club under *Platform admin*. The club's first admin gets an
+invite link, which you can open in a private window to act as that person.
 
 | Command | What it does |
 |---|---|
@@ -47,6 +51,7 @@ pnpm dev
 | `pnpm i18n:lint` | `nl`/`en` key parity, undefined and unused keys |
 | `pnpm licenses:check` | Production dependency licences against `.license-policy.json` |
 | `pnpm db:codegen` | Regenerate `src/lib/server/db/schema.d.ts` after a migration (CI checks it) |
+| `pnpm cli <command>` | Operator commands: `bootstrap`, `migrate`, `create-super-admin` (production: `node build/cli.js`) |
 | `pnpm db:reset` | Delete and recreate the local database container and volume |
 | `pnpm docs:dev` | Docs site |
 
