@@ -1,0 +1,6 @@
+{
+  "not_found": "This page doesn't exist.",
+  "forbidden": "You don't have access to this page.",
+  "internal": "Something went wrong. Please try again later.",
+  "back_home": "Go to the home page"
+}

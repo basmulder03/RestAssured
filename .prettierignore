@@ -1,0 +1,11 @@
+# Prose is formatted by hand (tables, line breaks); Prettier would reflow it.
+*.md
+LICENSE
+
+pnpm-lock.yaml
+build/
+.svelte-kit/
+coverage/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+src/lib/server/db/schema.d.ts

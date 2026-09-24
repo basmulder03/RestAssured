@@ -65,6 +65,12 @@ Two further forces:
 - Reference members need only a display name. All other personal fields are optional, and the UI
   encourages leaving them empty (data minimisation, ADR-0005).
 
+- The app lists a user's memberships across tenants (before any tenant context exists) through
+  one narrow `SECURITY DEFINER` function, `ra_user_memberships(user_id)`, owned by `ra_owner`.
+  `ra_owner` therefore has `BYPASSRLS`; `ra_app` never does. Any further cross-tenant function
+  needs the same scrutiny: narrow inputs, narrow outputs, `SET search_path`, EXECUTE granted
+  to `ra_app` only.
+
 ### 3. Tenant resolution: URL, not session
 
 - Tenant context comes from the URL path: `/t/{tenantSlug}/...`. The session is global

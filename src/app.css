@@ -1,0 +1,75 @@
+/* SPDX-License-Identifier: AGPL-3.0-or-later */
+/* ADR-0002: components use --ra-* tokens only. Brand tokens are overridden per tenant by an
+   injected :root block; surface tokens are platform-owned (light/dark). */
+
+:root {
+	--ra-color-primary: #1f4e79;
+	--ra-color-primary-contrast: #ffffff;
+	--ra-color-secondary: #c9a227;
+	--ra-color-secondary-contrast: #000000;
+	--ra-color-accent: var(--ra-color-primary);
+	--ra-radius: 6px;
+	--ra-font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--ra-space-unit: 8px;
+
+	--ra-surface: #ffffff;
+	--ra-surface-muted: #f4f5f7;
+	--ra-text: #1a1d21;
+	--ra-text-muted: #5b6470;
+	--ra-border: #d9dde3;
+
+	color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) {
+		--ra-surface: #16181c;
+		--ra-surface-muted: #202329;
+		--ra-text: #e8eaed;
+		--ra-text-muted: #a3aab4;
+		--ra-border: #343941;
+	}
+}
+
+:root[data-theme='dark'] {
+	--ra-surface: #16181c;
+	--ra-surface-muted: #202329;
+	--ra-text: #e8eaed;
+	--ra-text-muted: #a3aab4;
+	--ra-border: #343941;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	background: var(--ra-surface);
+	color: var(--ra-text);
+	font-family: var(--ra-font-family);
+	line-height: 1.5;
+}
+
+.app-root {
+	display: contents;
+}
+
+a {
+	color: var(--ra-color-accent);
+}
+
+:focus-visible {
+	outline: 3px solid var(--ra-color-accent);
+	outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* {
+		animation: none !important;
+		transition: none !important;
+	}
+}

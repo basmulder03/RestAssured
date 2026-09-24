@@ -35,6 +35,13 @@ Core ideas:
 - **No automated deployment or image publishing until v1.0** (ADR-0011). CI runs on every push to
   GitHub. The repository URL is not decided yet, so never hard-code owner, repo name, or URLs.
 
+## Commands
+
+Node via nvm (`nvm use`), pnpm from `packageManager`. Local DB: `pnpm db:up && pnpm db:bootstrap
+&& pnpm db:migrate` (port 54320). Before pushing: `pnpm lint && pnpm check && pnpm test &&
+pnpm i18n:lint`. After a migration: `pnpm db:codegen`. `main` is protected: branch, sign off
+(`git commit -s`), open a PR. Full list in `CONTRIBUTING.md`.
+
 ## Stack (ADR-0008)
 
 SvelteKit 2 + Svelte 5 (`adapter-node`), TypeScript strict, Node.js 26 LTS, pnpm, PostgreSQL ≥ 16

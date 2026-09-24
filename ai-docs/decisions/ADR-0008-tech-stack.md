@@ -18,7 +18,7 @@ across client and server so a small team (or one person plus agents) can maintai
 
 | Concern | Choice | Licence | Notes |
 |---|---|---|---|
-| Language | TypeScript (strict) | Apache-2.0 | |
+| Language | TypeScript 6.0 (strict) | Apache-2.0 | Stay on 6.x until SvelteKit and typescript-eslint support 7. |
 | Runtime | Node.js 26 (LTS from October 2026) | MIT | Pinned in `.nvmrc` and `engines`. Upgrade to each new LTS. Node ≥ 25 no longer bundles Corepack; install it with `npm i -g corepack` (MIT). |
 | Framework | SvelteKit 2 + Svelte 5 | MIT | SSR, form actions that work without JS, small client bundles. |
 | Adapter | `@sveltejs/adapter-node` | MIT | Single Node process behind a reverse proxy. |
@@ -58,7 +58,7 @@ components with scoped CSS and the `--ra-*` tokens (ADR-0002).
 | E2E tests | Playwright | Apache-2.0 |
 | Accessibility checks | `@axe-core/playwright` | MPL-2.0 (dev only, not distributed) |
 | Lint / format | ESLint, Prettier, `svelte-check` | MIT |
-| Local Postgres | Docker Compose file (Docker Engine or Podman) | Apache-2.0 |
+| Local Postgres | `scripts/dev-db.ts` running `postgres:18-alpine` via `docker run` (Docker Engine or Podman; no Compose plugin needed) | Apache-2.0 |
 | Docs site | VitePress (+ Mermaid) | MIT |
 
 ### Process model
