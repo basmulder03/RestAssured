@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import type { Kysely } from 'kysely';
-import type { DB } from '../../src/lib/server/db/schema';
+import type { DB } from '$lib/server/db/schema';
 
 export type TenantFixture = {
 	tenantId: string;

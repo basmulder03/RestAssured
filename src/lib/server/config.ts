@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import * as v from 'valibot';
-import { LOCALES } from '../i18n/locales';
+import { LOCALES } from '$lib/i18n/locales';
 
 const postgresUrl = v.pipe(
 	v.string(),

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import type { Kysely } from 'kysely';
-import { PERMISSIONS, type Permission } from '../domain/permissions';
-import type { DB } from './db/schema';
+import { PERMISSIONS, type Permission } from '$lib/domain/permissions';
+import type { DB } from '$lib/server/db/schema';
 
 const ALL = new Set<Permission>(PERMISSIONS.map((p) => p.code));
 const KNOWN = ALL as ReadonlySet<string>;

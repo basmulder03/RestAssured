@@ -2,11 +2,11 @@
 // Assets and assignments: who has what, and where it is (docs/SYSTEM_SPEC.md §2).
 import { sql, type Kysely, type Transaction } from 'kysely';
 import * as v from 'valibot';
-import { parseMoney, parseYear } from '../domain/money';
-import { act, assertId, assertPermission, isUuid, read, type Actor } from './actor';
-import { auditTenant } from './audit';
-import type { DB } from './db/schema';
-import { DomainError } from './errors';
+import { parseMoney, parseYear } from '$lib/domain/money';
+import { act, assertId, assertPermission, isUuid, read, type Actor } from '$lib/server/actor';
+import { auditTenant } from '$lib/server/audit';
+import type { DB } from '$lib/server/db/schema';
+import { DomainError } from '$lib/server/errors';
 
 export const ASSET_STATUSES = ['active', 'in_repair', 'retired', 'lost', 'sold'] as const;
 export type AssetStatus = (typeof ASSET_STATUSES)[number];

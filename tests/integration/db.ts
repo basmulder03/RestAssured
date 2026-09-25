@@ -4,7 +4,7 @@
 import { Kysely, PostgresDialect } from 'kysely';
 import pg from 'pg';
 import { loadDotEnv } from '../../scripts/env';
-import type { DB } from '../../src/lib/server/db/schema';
+import type { DB } from '$lib/server/db/schema';
 
 loadDotEnv();
 

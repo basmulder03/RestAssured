@@ -3,7 +3,7 @@ import { cpSync, mkdtempSync, appendFileSync, rmSync, writeFileSync } from 'node
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
-import { loadMigrations, migrate } from '../../src/lib/server/db/migrate';
+import { loadMigrations, migrate } from '$lib/server/db/migrate';
 import { ownerUrl } from './db';
 
 const dirs: string[] = [];

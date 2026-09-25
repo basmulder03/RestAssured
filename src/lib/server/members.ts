@@ -3,13 +3,13 @@
 // permissions itself; routes check too, but this is the layer the tests hold to account.
 import { sql, type Kysely } from 'kysely';
 import * as v from 'valibot';
-import type { Permission } from '../domain/permissions';
-import { act, assertId, assertPermission, type Actor } from './actor';
-import { auditTenant } from './audit';
-import { issueToken, type TokenPurpose } from './auth/tokens';
-import type { DB } from './db/schema';
-import { withTenant } from './db/tenant';
-import { DomainError } from './errors';
+import type { Permission } from '$lib/domain/permissions';
+import { act, assertId, assertPermission, type Actor } from '$lib/server/actor';
+import { auditTenant } from '$lib/server/audit';
+import { issueToken, type TokenPurpose } from '$lib/server/auth/tokens';
+import type { DB } from '$lib/server/db/schema';
+import { withTenant } from '$lib/server/db/tenant';
+import { DomainError } from '$lib/server/errors';
 
 export type { Actor };
 

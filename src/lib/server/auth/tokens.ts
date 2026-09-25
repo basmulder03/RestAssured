@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { sql, type Kysely, type Selectable } from 'kysely';
-import type { AuthTokens, DB } from '../db/schema';
-import { hashSecret, newSecret } from './secrets';
+import type { AuthTokens, DB } from '$lib/server/db/schema';
+import { hashSecret, newSecret } from '$lib/server/auth/secrets';
 
 export type TokenPurpose = 'magic_login' | 'invite' | 'password_reset';
 export type TokenRow = Selectable<AuthTokens>;

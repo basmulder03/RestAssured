@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import type { Kysely } from 'kysely';
-import { loadConfig, type Config } from './config';
-import { createDb, type DB } from './db';
-import { migrate } from './db/migrate';
+import { loadConfig, type Config } from '$lib/server/config';
+import { createDb, type DB } from '$lib/server/db';
+import { migrate } from '$lib/server/db/migrate';
 
 type Runtime = { config: Config; db: Kysely<DB> };
 let state: Runtime | undefined;

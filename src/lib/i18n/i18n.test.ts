@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest';
-import { formatMessage, messageVariables } from './format';
-import { buildDictionaries, createTranslator, dictionaries, resolveLocale } from './index';
+import { formatMessage, messageVariables } from '$lib/i18n/format';
+import { buildDictionaries, createTranslator, dictionaries, resolveLocale } from '$lib/i18n';
 
 describe('formatMessage', () => {
 	it('interpolates variables and leaves unknown ones visible', () => {

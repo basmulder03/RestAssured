@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { error, fail } from '@sveltejs/kit';
 import * as v from 'valibot';
-import { DomainError } from './errors';
+import { DomainError } from '$lib/server/errors';
 
 /** Reads the named fields of a form as strings (missing → ''). */
 export function formValues<K extends string>(

@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import type { Kysely } from 'kysely';
-import type { Permission } from '../domain/permissions';
-import type { DB } from './db/schema';
-import { userMemberships, withTenant } from './db/tenant';
-import { resolvePermissions } from './rbac';
+import type { Permission } from '$lib/domain/permissions';
+import type { DB } from '$lib/server/db/schema';
+import { userMemberships, withTenant } from '$lib/server/db/tenant';
+import { resolvePermissions } from '$lib/server/rbac';
 
 export type TenantContext = {
 	id: string;

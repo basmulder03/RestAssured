@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest';
-import { isUuid } from './actor';
-import { parseTarget } from './assets';
+import { isUuid } from '$lib/server/actor';
+import { parseTarget } from '$lib/server/assets';
 
 describe('id validation', () => {
 	it('accepts only real UUIDs', () => {

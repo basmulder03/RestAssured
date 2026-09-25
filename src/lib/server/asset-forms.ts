@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // Shared by the asset pages: options for pickers and form values from stored data.
 import type { Kysely } from 'kysely';
-import { moneyInputValue } from '../domain/money';
-import type { Actor } from './actor';
-import { memberOptions, type AssetDetail, type AssetFormValues } from './assets';
-import type { DB } from './db/schema';
-import { listCategories, listLocations } from './inventory';
+import { moneyInputValue } from '$lib/domain/money';
+import type { Actor } from '$lib/server/actor';
+import { memberOptions, type AssetDetail, type AssetFormValues } from '$lib/server/assets';
+import type { DB } from '$lib/server/db/schema';
+import { listCategories, listLocations } from '$lib/server/inventory';
 
 export const EMPTY_ASSET_FORM: AssetFormValues = {
 	categoryId: '',

@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import pg from 'pg';
-import { PERMISSIONS } from '../../domain/permissions';
+import { PERMISSIONS } from '$lib/domain/permissions';
 
 export type Migration = { version: string; file: string; sql: string; checksum: string };
 

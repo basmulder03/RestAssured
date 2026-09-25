@@ -120,6 +120,9 @@ See ADR-0008 for the full, licence-checked list. Anything not listed there needs
   boundary with a schema; internal code trusts typed values.
 - Naming: DB `snake_case`; TS `camelCase` values, `PascalCase` types; permission strings
   `resource:action`; i18n keys `feature.sub.key` (lower_snake segments).
+- Imports into `src/lib` always use the `$lib/…` alias, also in scripts and tests (tsx and esbuild
+  resolve it from `tsconfig.json`); only route-local `./$types` and helpers outside `src/lib` stay
+  relative.
 - Modules by feature (`assets/`, `assignments/`, `members/`, `auth/`, `rbac/`, `theming/`,
   `forecasting/`, `gdpr/`, `platform/`), each with its handlers, service, repository, and tests.
 - Money: `bigint`/integer cents, never floats at rest. Timestamps `timestamptz` in UTC.

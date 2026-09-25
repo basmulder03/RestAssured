@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest';
-import { PERMISSIONS, PERMISSION_GROUPS, permissionLabelKey } from './permissions';
+import { PERMISSIONS, PERMISSION_GROUPS, permissionLabelKey } from '$lib/domain/permissions';
 
 describe('permission catalogue', () => {
 	it('uses resource:action codes whose resource is the group', () => {

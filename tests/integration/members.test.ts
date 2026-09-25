@@ -2,9 +2,9 @@
 // Club member management: permissions, ADR-0003 guards, invites and admin-issued links.
 import type { Kysely } from 'kysely';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { hashSecret } from '../../src/lib/server/auth/secrets';
-import type { DB } from '../../src/lib/server/db/schema';
-import { withTenant } from '../../src/lib/server/db/tenant';
+import { hashSecret } from '$lib/server/auth/secrets';
+import type { DB } from '$lib/server/db/schema';
+import { withTenant } from '$lib/server/db/tenant';
 import {
 	createMember,
 	getMember,
@@ -15,9 +15,9 @@ import {
 	setMemberRoles,
 	setMemberStatus,
 	updateMember
-} from '../../src/lib/server/members';
-import { createSuperAdmin } from '../../src/lib/server/platform';
-import { resolveTenantContext } from '../../src/lib/server/tenancy';
+} from '$lib/server/members';
+import { createSuperAdmin } from '$lib/server/platform';
+import { resolveTenantContext } from '$lib/server/tenancy';
 import { appUrl, connect, ownerUrl } from './db';
 import { helpers } from './helpers';
 

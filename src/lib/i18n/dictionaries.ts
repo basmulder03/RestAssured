@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-import { isLocale, LOCALES, type Locale } from './locales';
+import { isLocale, LOCALES, type Locale } from '$lib/i18n/locales';
 
 export type Dictionary = Record<string, string>;
 

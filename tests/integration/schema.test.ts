@@ -2,9 +2,9 @@
 // Schema lint (ADR-0001, ADR-0005): structural rules every migration must keep.
 import { sql, type Kysely } from 'kysely';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { PERMISSIONS } from '../../src/lib/domain/permissions';
-import { PII_TABLES } from '../../src/lib/server/db/pii';
-import type { DB } from '../../src/lib/server/db/schema';
+import { PERMISSIONS } from '$lib/domain/permissions';
+import { PII_TABLES } from '$lib/server/db/pii';
+import type { DB } from '$lib/server/db/schema';
 import { appUrl, connect, ownerUrl } from './db';
 
 let owner: Kysely<DB>;

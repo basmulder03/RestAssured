@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest';
-import { loadConfig } from './config';
+import { loadConfig } from '$lib/server/config';
 
 const base = {
 	RA_DATABASE_URL: 'postgres://ra_app:x@localhost/restassured',

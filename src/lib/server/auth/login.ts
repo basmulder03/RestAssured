@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { sql, type Kysely } from 'kysely';
-import { auditPlatform } from '../audit';
-import type { DB } from '../db/schema';
-import { DomainError } from '../errors';
-import { hashPassword, passwordProblem, verifyPassword } from './password';
-import { LIMITS, withinRateLimit } from './rate-limit';
-import { createSession, revokeUserSessions } from './sessions';
-import { revokeUserTokens } from './tokens';
+import { auditPlatform } from '$lib/server/audit';
+import type { DB } from '$lib/server/db/schema';
+import { DomainError } from '$lib/server/errors';
+import { hashPassword, passwordProblem, verifyPassword } from '$lib/server/auth/password';
+import { LIMITS, withinRateLimit } from '$lib/server/auth/rate-limit';
+import { createSession, revokeUserSessions } from '$lib/server/auth/sessions';
+import { revokeUserTokens } from '$lib/server/auth/tokens';
 
 /**
  * Password login. Every failure is the same error, so responses don't reveal whether an
