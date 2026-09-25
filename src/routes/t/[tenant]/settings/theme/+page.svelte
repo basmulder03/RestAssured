@@ -2,13 +2,16 @@
 <script lang="ts">
 	import {
 		contrastRatio,
+		DARK_SURFACE,
+		displayRatio,
 		LIGHT_SURFACE,
+		linkColors,
 		MIN_CONTRAST,
 		themeVariables,
 		themeProblems,
 		type Theme
 	} from '$lib/domain/theme';
-	import { untrack } from 'svelte';
+	import { onMount, untrack } from 'svelte';
 	import { useT } from '$lib/i18n/context';
 
 	let { data, form } = $props();
@@ -32,7 +35,24 @@
 
 	const current = $derived<Theme>({ ...theme, accent: useAccent ? accentValue : null });
 	const problems = $derived(themeProblems(current));
-	const linkRatio = $derived(contrastRatio(current.accent ?? current.primary, LIGHT_SURFACE));
+	// Links as they'll render: as chosen on light pages, lightened where needed on dark pages.
+	const links = $derived(linkColors(current));
+	const linkRatio = $derived(contrastRatio(links.light, LIGHT_SURFACE));
+	const darkRatio = $derived(contrastRatio(links.dark, DARK_SURFACE));
+	const darkAdjusted = $derived(links.dark !== links.light);
+
+	// The preview shows the colours for the mode this browser is in.
+	let dark = $state(false);
+	onMount(() => {
+		const query = matchMedia('(prefers-color-scheme: dark)');
+		const update = () => {
+			const forced = document.documentElement.dataset.theme;
+			dark = forced ? forced === 'dark' : query.matches;
+		};
+		update();
+		query.addEventListener('change', update);
+		return () => query.removeEventListener('change', update);
+	});
 	const serverErrors = $derived(
 		(form && 'errors' in form ? form.errors : {}) as Record<string, string>
 	);
@@ -51,12 +71,16 @@
 
 	// Live preview via CSSOM (style.setProperty), which CSP allows; inline style attributes it doesn't.
 	let preview = $state<HTMLElement>();
+	let swatch = $state<HTMLElement>();
+	$effect(() => {
+		swatch?.style.setProperty('background', links.dark);
+	});
 	$effect(() => {
 		if (!preview || problems.some((p) => p.code !== 'theme.errors.link_contrast')) return;
 		for (const [name, value] of Object.entries(themeVariables(current))) {
 			preview.style.setProperty(name, value);
 		}
-		preview.style.setProperty('--ra-link', current.accent ?? current.primary);
+		preview.style.setProperty('--ra-link', dark ? links.dark : links.light);
 	});
 </script>
 
@@ -110,13 +134,19 @@
 				role="status"
 			>
 				{linkRatio >= MIN_CONTRAST
-					? t('theme.contrast_ok', { ratio: Math.floor(linkRatio * 10) / 10 })
-					: t('theme.errors.link_contrast', { ratio: Math.floor(linkRatio * 10) / 10 })}
+					? t('theme.contrast_light_ok', { ratio: displayRatio(linkRatio) })
+					: t('theme.errors.link_contrast', { ratio: displayRatio(linkRatio) })}
+			</p>
+			<p class="alert alert-success" role="status">
+				<span class="swatch" aria-hidden="true" bind:this={swatch}></span>
+				{darkAdjusted
+					? t('theme.contrast_dark_adjusted', { color: links.dark, ratio: displayRatio(darkRatio) })
+					: t('theme.contrast_dark_ok', { ratio: displayRatio(darkRatio) })}
 			</p>
 			{#if serverErrors.primary || serverErrors.secondary || serverErrors.accent}
 				<p class="alert alert-error" role="alert">
 					{t(serverErrors.accent ?? serverErrors.primary ?? serverErrors.secondary ?? '', {
-						ratio: Math.floor(linkRatio * 10) / 10
+						ratio: displayRatio(linkRatio)
 					})}
 				</p>
 			{/if}
@@ -238,6 +268,17 @@
 		flex-wrap: wrap;
 		align-items: center;
 		gap: var(--ra-space-unit);
+	}
+
+	.swatch {
+		display: inline-block;
+		width: 1em;
+		height: 1em;
+		margin-right: calc(var(--ra-space-unit) / 2);
+		vertical-align: -0.15em;
+		border: 1px solid var(--ra-border);
+		border-radius: 3px;
+		outline: 3px solid #16181c;
 	}
 
 	.badge {

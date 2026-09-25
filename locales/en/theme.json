@@ -7,8 +7,7 @@
   "use_accent": "Separate colour for links",
   "accent": "Link colour",
   "accent_hint": "Needed when the main colour is light: links must be readable on a white background.",
-  "contrast_ok": "Links are easy to read (contrast {ratio}:1).",
-  "errors.link_contrast": "Links in this colour are hard to read on white (contrast {ratio}:1, at least 4.5:1 needed). Choose a darker main colour or a separate link colour.",
+  "errors.link_contrast": "Links in this colour are hard to read on light pages (contrast {ratio}:1, at least 4.5:1 needed). Choose a darker main colour or a separate link colour.",
   "errors.color_invalid": "Choose a valid colour.",
   "radius_label": "Rounded corners",
   "radius.none": "None",
@@ -31,5 +30,8 @@
   "preview_link": "link",
   "preview_button": "Button",
   "preview_badge": "Label",
-  "preview_input": "Input field"
+  "preview_input": "Input field",
+  "contrast_light_ok": "On light pages, links are easy to read (contrast {ratio}:1).",
+  "contrast_dark_ok": "On dark pages too (contrast {ratio}:1).",
+  "contrast_dark_adjusted": "On dark pages this colour is hard to read, so {color} is used there automatically (contrast {ratio}:1)."
 }

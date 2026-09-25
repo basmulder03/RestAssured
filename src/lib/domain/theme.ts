@@ -36,8 +36,9 @@ export const DEFAULT_THEME: Theme = {
 
 /** WCAG 2.2 AA for normal text. */
 export const MIN_CONTRAST = 4.5;
-/** The light surface links are drawn on (see app.css). */
+/** The page backgrounds links are drawn on; must match --ra-surface in app.css. */
 export const LIGHT_SURFACE = '#ffffff';
+export const DARK_SURFACE = '#16181c';
 
 const HEX = /^#[0-9a-f]{6}$/i;
 
@@ -70,6 +71,43 @@ export function contrastText(background: string): '#000000' | '#ffffff' {
 		: '#ffffff';
 }
 
+function hexToRgb(hex: string): [number, number, number] {
+	const n = parseInt(hex.slice(1), 16);
+	return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+}
+
+function rgbToHex(rgb: [number, number, number]): string {
+	return `#${rgb.map((c) => Math.round(c).toString(16).padStart(2, '0')).join('')}`;
+}
+
+/**
+ * `color` if it reaches AA on `surface`; otherwise the closest readable colour, found by mixing
+ * towards white (dark surfaces) or black (light surfaces) in 5% steps. Always terminates: pure
+ * white or black passes on our surfaces.
+ */
+export function readableOn(color: string, surface: string): string {
+	if (contrastRatio(color, surface) >= MIN_CONTRAST) return color.toLowerCase();
+	const target = luminance(surface) < 0.5 ? 255 : 0;
+	const from = hexToRgb(color);
+	for (let step = 1; step <= 20; step++) {
+		const t = step / 20;
+		const mixed = rgbToHex(from.map((c) => c + (target - c) * t) as [number, number, number]);
+		if (contrastRatio(mixed, surface) >= MIN_CONTRAST) return mixed;
+	}
+	return target === 255 ? '#ffffff' : '#000000';
+}
+
+/** Link colours as rendered: as chosen on light pages, adjusted where needed on dark pages. */
+export function linkColors(theme: Theme): { light: string; dark: string } {
+	const link = (theme.accent ?? theme.primary).toLowerCase();
+	return { light: link, dark: readableOn(link, DARK_SURFACE) };
+}
+
+/** Contrast rounded down to two decimals, so a failing value is never shown as passing. */
+export function displayRatio(ratio: number): number {
+	return Math.floor(ratio * 100) / 100;
+}
+
 export type ThemeProblem = {
 	field: keyof Theme;
 	code: string;
@@ -77,8 +115,9 @@ export type ThemeProblem = {
 };
 
 /**
- * Checks a theme. Text on the brand colours always gets black or white, so that can't fail;
- * what can fail is the link colour (accent, or primary) on the light page background.
+ * Checks a theme. Text on the brand colours always gets black or white, so that can't fail.
+ * Links must be readable on light pages as chosen; on dark pages they're adjusted automatically
+ * (linkColors), so only the light check can fail.
  */
 export function themeProblems(theme: Theme): ThemeProblem[] {
 	const problems: ThemeProblem[] = [];
@@ -99,7 +138,7 @@ export function themeProblems(theme: Theme): ThemeProblem[] {
 		problems.push({
 			field: theme.accent ? 'accent' : 'primary',
 			code: 'theme.errors.link_contrast',
-			params: { ratio: Math.floor(ratio * 100) / 100 }
+			params: { ratio: displayRatio(ratio) }
 		});
 	}
 	return problems;
@@ -113,6 +152,8 @@ export function themeVariables(theme: Theme): Record<string, string> {
 		'--ra-color-secondary': theme.secondary.toLowerCase(),
 		'--ra-color-secondary-contrast': contrastText(theme.secondary),
 		'--ra-color-accent': (theme.accent ?? theme.primary).toLowerCase(),
+		'--ra-link-light': linkColors(theme).light,
+		'--ra-link-dark': linkColors(theme).dark,
 		'--ra-radius': RADII[theme.radius],
 		'--ra-font-family': FONTS[theme.font],
 		'--ra-space-unit': DENSITIES[theme.density]
