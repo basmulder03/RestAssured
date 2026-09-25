@@ -36,9 +36,26 @@ export const DEFAULT_THEME: Theme = {
 
 /** WCAG 2.2 AA for normal text. */
 export const MIN_CONTRAST = 4.5;
-/** The page backgrounds links are drawn on; must match --ra-surface in app.css. */
-export const LIGHT_SURFACE = '#ffffff';
-export const DARK_SURFACE = '#16181c';
+/** Platform-owned page colours per mode; must match app.css (a unit test checks). */
+export const SURFACES = {
+	light: {
+		'--ra-surface': '#ffffff',
+		'--ra-surface-muted': '#f4f5f7',
+		'--ra-text': '#1a1d21',
+		'--ra-text-muted': '#5b6470',
+		'--ra-border': '#d9dde3'
+	},
+	dark: {
+		'--ra-surface': '#16181c',
+		'--ra-surface-muted': '#202329',
+		'--ra-text': '#e8eaed',
+		'--ra-text-muted': '#a3aab4',
+		'--ra-border': '#343941'
+	}
+} as const;
+/** The page backgrounds links are drawn on. */
+export const LIGHT_SURFACE = SURFACES.light['--ra-surface'];
+export const DARK_SURFACE = SURFACES.dark['--ra-surface'];
 
 const HEX = /^#[0-9a-f]{6}$/i;
 
