@@ -24,7 +24,59 @@ export type JsonPrimitive = boolean | number | string | null;
 
 export type JsonValue = JsonArray | JsonObject | JsonPrimitive;
 
+export type Numeric = ColumnType<string, number | string, number | string>;
+
 export type Timestamp = ColumnType<Date, Date | string, Date | string>;
+
+export interface AssetCategories {
+	archived_at: Timestamp | null;
+	created_at: Generated<Timestamp>;
+	id: Generated<string>;
+	kind: string;
+	label_i18n: Json | null;
+	label_key: string | null;
+	lifespan_years: number | null;
+	maintenance_pct: Numeric | null;
+	residual_pct: Numeric | null;
+	sort_order: Generated<number>;
+	tenant_id: string;
+}
+
+export interface Assets {
+	brand: string | null;
+	category_id: string;
+	created_at: Generated<Timestamp>;
+	description: string | null;
+	id: Generated<string>;
+	insured_value_cents: Int8 | null;
+	insured_value_year: number | null;
+	lifespan_years: number | null;
+	model: string | null;
+	owner_membership_id: string | null;
+	ownership: Generated<string>;
+	purchase_price_cents: Int8 | null;
+	purchase_year: number | null;
+	serial_number: string | null;
+	status: Generated<string>;
+	tag: string | null;
+	tenant_id: string;
+	updated_at: Generated<Timestamp>;
+}
+
+export interface Assignments {
+	asset_id: string;
+	checked_out_at: Generated<Timestamp>;
+	condition_in: string | null;
+	condition_out: string | null;
+	id: Generated<string>;
+	issued_by_membership_id: string | null;
+	location_id: string | null;
+	membership_id: string | null;
+	notes: string | null;
+	returned_at: Timestamp | null;
+	returned_by_membership_id: string | null;
+	tenant_id: string;
+}
 
 export interface AuditLog {
 	action: string;
@@ -49,6 +101,14 @@ export interface AuthTokens {
 	target_tenant_id: string | null;
 	token_hash: Buffer;
 	user_id: string | null;
+}
+
+export interface Locations {
+	archived_at: Timestamp | null;
+	created_at: Generated<Timestamp>;
+	id: Generated<string>;
+	name: string;
+	tenant_id: string;
 }
 
 export interface MembershipRoles {
@@ -162,8 +222,12 @@ export interface Users {
 }
 
 export interface DB {
+	asset_categories: AssetCategories;
+	assets: Assets;
+	assignments: Assignments;
 	audit_log: AuditLog;
 	auth_tokens: AuthTokens;
+	locations: Locations;
 	membership_roles: MembershipRoles;
 	permissions: Permissions;
 	platform_audit_log: PlatformAuditLog;

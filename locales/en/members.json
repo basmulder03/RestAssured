@@ -55,5 +55,7 @@
   "errors.no_account": "This member has no account.",
   "errors.platform_account": "Only platform admins can create links for this account.",
   "errors.admin_role_only": "Only a club admin can grant or revoke the admin role.",
-  "errors.escalation": "You can't grant a role with permissions you don't have yourself."
+  "errors.escalation": "You can't grant a role with permissions you don't have yourself.",
+  "on_loan": "On loan",
+  "on_loan_none": "This member has nothing on loan."
 }

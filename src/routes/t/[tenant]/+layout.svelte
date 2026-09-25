@@ -10,16 +10,25 @@
 	const can = (p: Permission) => data.tenant.permissions.includes(p);
 	const home = $derived(resolve('/t/[tenant]', { tenant: data.tenant.slug }));
 	const members = $derived(resolve('/t/[tenant]/members', { tenant: data.tenant.slug }));
+	const assets = $derived(resolve('/t/[tenant]/assets', { tenant: data.tenant.slug }));
+	const inventory = $derived(
+		resolve('/t/[tenant]/settings/inventory', { tenant: data.tenant.slug })
+	);
+	const current = (href: string) => (page.url.pathname.startsWith(href) ? 'page' : undefined);
 </script>
 
 <nav class="club-nav" aria-label={t('club.nav_label')}>
 	<a href={home} aria-current={page.url.pathname === home ? 'page' : undefined}
 		>{t('club.overview')}</a
 	>
+	{#if can('assets:view')}
+		<a href={assets} aria-current={current(assets)}>{t('assets.title')}</a>
+	{/if}
 	{#if can('members:view')}
-		<a href={members} aria-current={page.url.pathname.startsWith(members) ? 'page' : undefined}>
-			{t('members.title')}
-		</a>
+		<a href={members} aria-current={current(members)}>{t('members.title')}</a>
+	{/if}
+	{#if can('assets:edit')}
+		<a href={inventory} aria-current={current(inventory)}>{t('inventory_settings.nav')}</a>
 	{/if}
 </nav>
 

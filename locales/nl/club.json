@@ -1,7 +1,12 @@
 {
   "suspended": "Deze vereniging is opgeschort. Je kunt gegevens bekijken maar niet wijzigen.",
-  "dashboard_placeholder": "Het materiaaloverzicht komt hier binnenkort.",
   "nav_label": "Vereniging",
   "overview": "Overzicht",
-  "errors.not_writable": "Deze vereniging is opgeschort; wijzigingen zijn niet mogelijk."
+  "errors.not_writable": "Deze vereniging is opgeschort; wijzigingen zijn niet mogelijk.",
+  "stats.current": "stuks materiaal",
+  "stats.on_loan": "uitgeleend",
+  "stats.in_repair": "in reparatie",
+  "stats.unplaced": "zonder bekende plek",
+  "to_assets": "Naar het materiaal",
+  "no_asset_access": "Je hebt geen toegang tot het materiaaloverzicht."
 }

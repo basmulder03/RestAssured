@@ -1,0 +1,19 @@
+{
+  "title": "Categories and locations",
+  "nav": "Settings",
+  "categories": "Categories",
+  "categories_intro": "Rename categories to what your club calls them, or add your own.",
+  "locations": "Locations",
+  "locations_intro": "Where assets are stored, for example the rehearsal room or the depot.",
+  "archived": "archived",
+  "restore": "Restore",
+  "archive": "Archive",
+  "name_nl": "Name (Dutch)",
+  "name_en": "Name (English)",
+  "kind": "Kind",
+  "new_category": "New category",
+  "add": "Add",
+  "new_location": "New location",
+  "location_name": "Name",
+  "saved": "Saved."
+}

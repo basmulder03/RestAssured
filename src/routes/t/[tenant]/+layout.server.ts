@@ -9,6 +9,7 @@ export const load: LayoutServerLoad = ({ locals }) => {
 			slug: tenant.slug,
 			name: tenant.name,
 			status: tenant.status,
+			currency: tenant.currency,
 			isTenantAdmin: tenant.isTenantAdmin,
 			// For showing/hiding controls only; every action checks permissions server-side.
 			permissions: [...tenant.permissions]

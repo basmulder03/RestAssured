@@ -131,7 +131,8 @@ erDiagram
     LOCATIONS {
         uuid tenant_id PK
         uuid id PK
-        jsonb label_i18n
+        text name "proper name, not translated"
+        timestamptz archived_at
     }
     ASSETS {
         uuid tenant_id PK
@@ -221,7 +222,9 @@ erDiagram
 | One open assignment per asset | `UNIQUE (tenant_id, asset_id) WHERE returned_at IS NULL`. |
 | Assignee xor location | `CHECK ((membership_id IS NULL) <> (location_id IS NULL))`. |
 | Private ownership | `CHECK (ownership = 'club' OR owner_membership_id IS NOT NULL)`. |
-| Serial uniqueness | `UNIQUE (tenant_id, category_id, lower(serial_number)) WHERE serial_number IS NOT NULL` — soft-warn in UI, hard constraint optional per tenant. |
+| Serial uniqueness | `UNIQUE (tenant_id, lower(coalesce(brand, '')), lower(serial_number)) WHERE serial_number IS NOT NULL`: the same serial from the same brand is the same instrument. |
+| Tag uniqueness | `UNIQUE (tenant_id, lower(tag)) WHERE tag IS NOT NULL` (club inventory number). |
+| Deleting assets | Only assets without any assignment history; others are set to retired, lost or sold. |
 | Money | `*_cents bigint CHECK (>= 0)`. |
 | Years | `purchase_year BETWEEN 1900 AND extract(year from now()) + 1`. |
 | Audit append-only | `ra_app` has `INSERT, SELECT` only on `audit_log`, `erasure_log`. |

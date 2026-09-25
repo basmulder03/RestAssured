@@ -4,7 +4,9 @@
 	import LinkShare from '$lib/components/LinkShare.svelte';
 	import MemberFields from '$lib/components/MemberFields.svelte';
 	import type { Permission } from '$lib/domain/permissions';
+	import { assetTitle } from '$lib/i18n/assets';
 	import { useT } from '$lib/i18n/context';
+	import { formatDateTime } from '$lib/i18n/intl';
 	import { entityLabel, memberName } from '$lib/i18n/labels';
 
 	let { data, form } = $props();
@@ -51,6 +53,30 @@
 				qrSvg={form.link.qrSvg}
 				locale={data.locale}
 			/>
+		</section>
+	{/if}
+
+	{#if data.loans}
+		<section class="stack">
+			<h2>{t('members.on_loan')}</h2>
+			{#if data.loans.length === 0}
+				<p class="muted">{t('members.on_loan_none')}</p>
+			{:else}
+				<ul>
+					{#each data.loans as loan (loan.id)}
+						<li>
+							<a
+								href={resolve('/t/[tenant]/assets/[id]', { tenant: data.tenant.slug, id: loan.id })}
+								>{assetTitle(t, loan)}</a
+							>
+							{#if loan.serialNumber}<span class="muted"> · {loan.serialNumber}</span>{/if}
+							<span class="muted">
+								· {t('assets.since', { date: formatDateTime(data.locale, loan.since) })}</span
+							>
+						</li>
+					{/each}
+				</ul>
+			{/if}
 		</section>
 	{/if}
 

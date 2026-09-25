@@ -1,37 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // Club member management (ADR-0001, ADR-0003, ADR-0004). Every function checks the actor's
 // permissions itself; routes check too, but this is the layer the tests hold to account.
-import { sql, type Kysely, type Transaction } from 'kysely';
+import { sql, type Kysely } from 'kysely';
 import * as v from 'valibot';
 import type { Permission } from '../domain/permissions';
+import { act, assertId, assertPermission, type Actor } from './actor';
 import { auditTenant } from './audit';
 import { issueToken, type TokenPurpose } from './auth/tokens';
 import type { DB } from './db/schema';
 import { withTenant } from './db/tenant';
 import { DomainError } from './errors';
-import type { TenantContext } from './tenancy';
 
-export type Actor = { userId: string; tenant: TenantContext };
-
-function assertPermission(actor: Actor, permission: Permission): void {
-	if (!actor.tenant.permissions.has(permission)) throw new DomainError('errors.forbidden');
-}
-
-function assertWritable(actor: Actor): void {
-	if (actor.tenant.status !== 'active') throw new DomainError('club.errors.not_writable');
-}
-
-/** Runs `fn` scoped to the actor's club after the permission and writability checks. */
-function act<T>(
-	db: Kysely<DB>,
-	actor: Actor,
-	permission: Permission,
-	fn: (trx: Transaction<DB>) => Promise<T>
-): Promise<T> {
-	assertPermission(actor, permission);
-	assertWritable(actor);
-	return withTenant(db, actor.tenant.id, fn);
-}
+export type { Actor };
 
 const optionalText = (max: number) =>
 	v.pipe(
@@ -134,7 +114,7 @@ export async function getMember(db: Kysely<DB>, actor: Actor, membershipId: stri
 }
 
 async function findMember(trx: Kysely<DB>, tenantId: string, membershipId: string) {
-	if (!/^[0-9a-f-]{36}$/i.test(membershipId)) throw new DomainError('errors.not_found');
+	assertId(membershipId);
 	const m = await trx
 		.selectFrom('tenant_memberships')
 		.selectAll()

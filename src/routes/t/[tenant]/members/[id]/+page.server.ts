@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { fail, type RequestEvent } from '@sveltejs/kit';
 import * as v from 'valibot';
+import { assetsHeldBy } from '$lib/server/assets';
 import { domainFailure, fieldErrors, formValues, loadFailure } from '$lib/server/forms';
 import { requireTenant, requireUser } from '$lib/server/guards';
 import {
@@ -39,11 +40,15 @@ async function shareable(link: IssuedLink, origin: string) {
 export const load: PageServerLoad = async (event) => {
 	const actor = actorOf(event);
 	try {
-		const [member, roles] = await Promise.all([
+		const p = actor.tenant.permissions;
+		const [member, roles, loans] = await Promise.all([
 			getMember(runtime().db, actor, event.params.id),
-			listRoles(runtime().db, actor)
+			listRoles(runtime().db, actor),
+			p.has('assets:view') && p.has('assignments:view')
+				? assetsHeldBy(runtime().db, actor, event.params.id)
+				: Promise.resolve(null)
 		]);
-		return { member, roles, created: event.url.searchParams.has('created') };
+		return { member, roles, loans, created: event.url.searchParams.has('created') };
 	} catch (err) {
 		loadFailure(err);
 	}

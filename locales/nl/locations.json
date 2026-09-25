@@ -1,0 +1,4 @@
+{
+  "errors.name_taken": "Er is al een locatie met de naam \"{name}\".",
+  "errors.in_use": "Op deze locatie ligt nog materiaal. Verplaats het eerst."
+}

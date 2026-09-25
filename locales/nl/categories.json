@@ -1,0 +1,16 @@
+{
+  "brass": "Koperblazers",
+  "woodwind": "Houtblazers",
+  "saxophones": "Saxofoons",
+  "percussion": "Slagwerk",
+  "other_instruments": "Overige instrumenten",
+  "uniforms": "Uniformen",
+  "uniform_accessories": "Uniformaccessoires",
+  "music_stands": "Lessenaars",
+  "accessories": "Accessoires",
+  "cases": "Koffers",
+  "kind.instrument": "Instrument",
+  "kind.clothing": "Kleding",
+  "kind.accessory": "Accessoire",
+  "kind.case": "Koffer"
+}
