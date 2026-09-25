@@ -35,12 +35,15 @@ cp .env.example .env
 pnpm db:up                  # PostgreSQL 18 on 127.0.0.1:54320 (RA_CONTAINER_CLI=podman for Podman)
 pnpm db:bootstrap           # roles ra_owner / ra_app + database (idempotent)
 pnpm db:migrate
-pnpm cli create-super-admin --email you@example.org   # prints a one-time login link
-pnpm dev
+pnpm dev:seed               # demo clubs, members, assets and known dev logins (local DB only)
+pnpm dev                    # http://localhost:5173
 ```
 
-Open the printed link, then create a club under *Platform admin*. The club's first admin gets an
-invite link, which you can open in a private window to act as that person.
+`pnpm dev:seed` prints the dev logins: `super@restassured.test` (Super Admin),
+`admin@restassured.test` (admin of two demo clubs) and `quartermaster@restassured.test`, all with
+password `restassured-dev`. It only runs against a database on localhost and can be re-run safely.
+To start from scratch instead, run `pnpm cli create-super-admin --email you@example.org` for a
+one-time login link and create a club under *Platform admin*.
 
 | Command | What it does |
 |---|---|
@@ -52,6 +55,7 @@ invite link, which you can open in a private window to act as that person.
 | `pnpm licenses:check` | Production dependency licences against `.license-policy.json` |
 | `pnpm db:codegen` | Regenerate `src/lib/server/db/schema.d.ts` after a migration (CI checks it) |
 | `pnpm cli <command>` | Operator commands: `bootstrap`, `migrate`, `create-super-admin` (production: `node build/cli.js`) |
+| `pnpm dev:seed` | Demo data and known dev logins (localhost databases only) |
 | `pnpm db:reset` | Delete and recreate the local database container and volume |
 | `pnpm docs:dev` | Docs site |
 
