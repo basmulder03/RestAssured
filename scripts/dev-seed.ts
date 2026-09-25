@@ -2,12 +2,10 @@
 // Local development only: known accounts and demo data, so you can sign in and click around.
 // Refuses to run against anything but a database on this machine. Idempotent: re-running
 // resets the demo passwords and leaves existing data alone.
-import type { Kysely } from 'kysely';
 import { assignAsset, createAsset, type AssetInput } from '../src/lib/server/assets';
 import { acceptInvite } from '../src/lib/server/auth/links';
 import { hashPassword } from '../src/lib/server/auth/password';
 import { createDb } from '../src/lib/server/db/index';
-import type { DB } from '../src/lib/server/db/schema';
 import { withTenant } from '../src/lib/server/db/tenant';
 import { createLocation, listCategories } from '../src/lib/server/inventory';
 import {
