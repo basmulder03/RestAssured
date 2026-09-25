@@ -15,6 +15,8 @@ export type TenantContext = {
 	membershipId: string;
 	permissions: ReadonlySet<Permission>;
 	isTenantAdmin: boolean;
+	/** Bumped on every theme change; keys the theme CSS cache (ADR-0002). */
+	themeVersion: number;
 };
 
 /**
@@ -34,9 +36,18 @@ export async function resolveTenantContext(
 
 	return withTenant(db, membership.tenantId, async (trx) => {
 		const tenant = await trx
-			.selectFrom('tenants')
-			.select(['id', 'slug', 'name', 'status', 'default_locale', 'currency'])
-			.where('id', '=', membership.tenantId)
+			.selectFrom('tenants as t')
+			.leftJoin('theme_settings as ts', 'ts.tenant_id', 't.id')
+			.select([
+				't.id',
+				't.slug',
+				't.name',
+				't.status',
+				't.default_locale',
+				't.currency',
+				'ts.version'
+			])
+			.where('t.id', '=', membership.tenantId)
 			.executeTakeFirstOrThrow();
 		const { permissions, isTenantAdmin } = await resolvePermissions(
 			trx,
@@ -52,7 +63,8 @@ export async function resolveTenantContext(
 			currency: tenant.currency,
 			membershipId: membership.membershipId,
 			permissions,
-			isTenantAdmin
+			isTenantAdmin,
+			themeVersion: tenant.version ?? 0
 		};
 	});
 }

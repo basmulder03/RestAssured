@@ -27,6 +27,12 @@ describe('formatMessage', () => {
 		).toBe('Jo has 2 assets');
 	});
 
+	it('formats number parameters for the locale', () => {
+		expect(formatMessage('contrast {ratio}:1', 'nl', { ratio: 4.5 })).toBe('contrast 4,5:1');
+		expect(formatMessage('contrast {ratio}:1', 'en', { ratio: 4.5 })).toBe('contrast 4.5:1');
+		expect(formatMessage('#{id}', 'nl', { id: '1002' })).toBe('#1002');
+	});
+
 	it('allows variables inside plural options', () => {
 		const msg = '{count, plural, one {# instrument for {name}} other {# instruments for {name}}}';
 		expect(formatMessage(msg, 'en', { count: 3, name: 'Jo' })).toBe('3 instruments for Jo');

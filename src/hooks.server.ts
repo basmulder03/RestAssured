@@ -1,11 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import type { Handle, ServerInit } from '@sveltejs/kit';
+import { dev } from '$app/environment';
 import { env } from '$env/dynamic/private';
 import { resolveLocale } from '$lib/i18n';
 import { sessionCookieName, validateSession } from '$lib/server/auth/sessions';
+import { allowStyleHash, styleHash } from '$lib/server/csp';
 import { clearSessionCookie } from '$lib/server/guards';
 import { initRuntime, runtime } from '$lib/server/runtime';
 import { resolveTenantContext } from '$lib/server/tenancy';
+import { tenantThemeCss } from '$lib/server/theming';
 
 export const init: ServerInit = async () => {
 	await initRuntime(env);
@@ -62,9 +65,20 @@ export const handle: Handle = async ({ event, resolve }) => {
 		acceptLanguage: event.request.headers.get('accept-language')
 	});
 
+	// ADR-0002: the club theme as an inline <style> in <head>, so the first paint is branded.
+	const theme = locals.tenant
+		? await tenantThemeCss(db, locals.tenant.id, locals.tenant.themeVersion)
+		: null;
 	const response = await resolve(event, {
-		transformPageChunk: ({ html }) => html.replace('%ra.lang%', locals.locale)
+		transformPageChunk: ({ html }) =>
+			html
+				.replace('%ra.lang%', locals.locale)
+				.replace('%ra.theme%', theme ? `<style id="ra-tenant-theme">${theme}</style>` : '')
 	});
+	const csp = response.headers.get('content-security-policy');
+	if (theme && csp && !dev) {
+		response.headers.set('content-security-policy', allowStyleHash(csp, styleHash(theme)));
+	}
 	for (const [name, value] of Object.entries(SECURITY_HEADERS)) {
 		if (!response.headers.has(name)) response.headers.set(name, value);
 	}

@@ -14,6 +14,7 @@
 	const inventory = $derived(
 		resolve('/t/[tenant]/settings/inventory', { tenant: data.tenant.slug })
 	);
+	const branding = $derived(resolve('/t/[tenant]/settings/theme', { tenant: data.tenant.slug }));
 	const current = (href: string) => (page.url.pathname.startsWith(href) ? 'page' : undefined);
 </script>
 
@@ -29,6 +30,9 @@
 	{/if}
 	{#if can('assets:edit')}
 		<a href={inventory} aria-current={current(inventory)}>{t('inventory_settings.nav')}</a>
+	{/if}
+	{#if can('tenant:manage_theme')}
+		<a href={branding} aria-current={current(branding)}>{t('theme.nav')}</a>
 	{/if}
 </nav>
 
