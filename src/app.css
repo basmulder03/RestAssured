@@ -17,6 +17,8 @@
 	--ra-text: #1a1d21;
 	--ra-text-muted: #5b6470;
 	--ra-border: #d9dde3;
+	/* Links: the club accent on the light surface, where its contrast is checked (ADR-0002). */
+	--ra-link: var(--ra-color-accent);
 
 	color-scheme: light dark;
 }
@@ -28,6 +30,8 @@
 		--ra-text: #e8eaed;
 		--ra-text-muted: #a3aab4;
 		--ra-border: #343941;
+		/* A club colour chosen for white pages can be unreadable on dark ones: lighten it. */
+		--ra-link: color-mix(in oklab, var(--ra-color-accent) 35%, white);
 	}
 }
 
@@ -37,6 +41,7 @@
 	--ra-text: #e8eaed;
 	--ra-text-muted: #a3aab4;
 	--ra-border: #343941;
+	--ra-link: color-mix(in oklab, var(--ra-color-accent) 35%, white);
 }
 
 *,
@@ -59,7 +64,7 @@ body {
 }
 
 a {
-	color: var(--ra-color-accent);
+	color: var(--ra-link);
 }
 
 :focus-visible {
@@ -159,7 +164,7 @@ textarea {
 	padding: 0;
 	border: 0;
 	background: none;
-	color: var(--ra-color-accent);
+	color: var(--ra-link);
 	font-weight: normal;
 	text-decoration: underline;
 }

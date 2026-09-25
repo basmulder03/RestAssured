@@ -32,9 +32,12 @@ export function formatMessage(message: string, locale: string, params: MessagePa
 			options.get('other');
 		return (chosen ?? '').replaceAll('#', new Intl.NumberFormat(locale).format(value));
 	});
-	return withPlurals.replace(VARIABLE, (whole, name: string) =>
-		name in params ? String(params[name]) : whole
-	);
+	// Numbers follow the locale (1,4 in nl, 1.4 in en); pass strings for ids and years.
+	return withPlurals.replace(VARIABLE, (whole, name: string) => {
+		const value = params[name];
+		if (value === undefined) return whole;
+		return typeof value === 'number' ? new Intl.NumberFormat(locale).format(value) : value;
+	});
 }
 
 /** Placeholder names used in a message, for lint parity checks between locales. */
