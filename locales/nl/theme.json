@@ -7,8 +7,7 @@
   "use_accent": "Aparte kleur voor links",
   "accent": "Linkkleur",
   "accent_hint": "Nodig als de hoofdkleur licht is: links moeten goed leesbaar zijn op een witte achtergrond.",
-  "contrast_ok": "Links zijn goed leesbaar (contrast {ratio}:1).",
-  "errors.link_contrast": "Links in deze kleur zijn slecht leesbaar op wit (contrast {ratio}:1, minimaal 4,5:1 nodig). Kies een donkerdere hoofdkleur of een aparte linkkleur.",
+  "errors.link_contrast": "Links in deze kleur zijn slecht leesbaar op lichte pagina's (contrast {ratio}:1, minimaal 4,5:1 nodig). Kies een donkerdere hoofdkleur of een aparte linkkleur.",
   "errors.color_invalid": "Kies een geldige kleur.",
   "radius_label": "Afgeronde hoeken",
   "radius.none": "Geen",
@@ -31,5 +30,8 @@
   "preview_link": "link",
   "preview_button": "Knop",
   "preview_badge": "Label",
-  "preview_input": "Invoerveld"
+  "preview_input": "Invoerveld",
+  "contrast_light_ok": "Op lichte pagina's zijn links goed leesbaar (contrast {ratio}:1).",
+  "contrast_dark_ok": "Op donkere pagina's ook (contrast {ratio}:1).",
+  "contrast_dark_adjusted": "Op donkere pagina's is deze kleur slecht leesbaar, daar wordt automatisch {color} gebruikt (contrast {ratio}:1)."
 }
