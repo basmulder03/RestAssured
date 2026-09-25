@@ -33,5 +33,7 @@
   "preview_input": "Input field",
   "contrast_light_ok": "On light pages, links are easy to read (contrast {ratio}:1).",
   "contrast_dark_ok": "On dark pages too (contrast {ratio}:1).",
-  "contrast_dark_adjusted": "On dark pages this colour is hard to read, so {color} is used there automatically (contrast {ratio}:1)."
+  "contrast_dark_adjusted": "On dark pages this colour is hard to read, so {color} is used there automatically (contrast {ratio}:1).",
+  "preview_light": "Light mode",
+  "preview_dark": "Dark mode"
 }

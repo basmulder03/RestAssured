@@ -7,11 +7,12 @@
 		LIGHT_SURFACE,
 		linkColors,
 		MIN_CONTRAST,
+		SURFACES,
 		themeVariables,
 		themeProblems,
 		type Theme
 	} from '$lib/domain/theme';
-	import { onMount, untrack } from 'svelte';
+	import { untrack } from 'svelte';
 	import { useT } from '$lib/i18n/context';
 
 	let { data, form } = $props();
@@ -41,18 +42,6 @@
 	const darkRatio = $derived(contrastRatio(links.dark, DARK_SURFACE));
 	const darkAdjusted = $derived(links.dark !== links.light);
 
-	// The preview shows the colours for the mode this browser is in.
-	let dark = $state(false);
-	onMount(() => {
-		const query = matchMedia('(prefers-color-scheme: dark)');
-		const update = () => {
-			const forced = document.documentElement.dataset.theme;
-			dark = forced ? forced === 'dark' : query.matches;
-		};
-		update();
-		query.addEventListener('change', update);
-		return () => query.removeEventListener('change', update);
-	});
 	const serverErrors = $derived(
 		(form && 'errors' in form ? form.errors : {}) as Record<string, string>
 	);
@@ -69,18 +58,25 @@
 		comfortable: 'theme.density.comfortable'
 	};
 
-	// Live preview via CSSOM (style.setProperty), which CSP allows; inline style attributes it doesn't.
-	let preview = $state<HTMLElement>();
+	// Live previews via CSSOM (style.setProperty), which CSP allows; inline style attributes
+	// it doesn't. One per mode, with the page colours of that mode and its link colour.
+	const MODES = ['light', 'dark'] as const;
+	const previews = $state<Partial<Record<(typeof MODES)[number], HTMLElement>>>({});
 	let swatch = $state<HTMLElement>();
 	$effect(() => {
 		swatch?.style.setProperty('background', links.dark);
 	});
 	$effect(() => {
-		if (!preview || problems.some((p) => p.code !== 'theme.errors.link_contrast')) return;
-		for (const [name, value] of Object.entries(themeVariables(current))) {
-			preview.style.setProperty(name, value);
+		if (problems.some((p) => p.code !== 'theme.errors.link_contrast')) return;
+		const vars = themeVariables(current);
+		for (const mode of MODES) {
+			const el = previews[mode];
+			if (!el) continue;
+			for (const [name, value] of Object.entries({ ...vars, ...SURFACES[mode] })) {
+				el.style.setProperty(name, value);
+			}
+			el.style.setProperty('--ra-link', links[mode]);
 		}
-		preview.style.setProperty('--ra-link', dark ? links.dark : links.light);
 	});
 </script>
 
@@ -176,23 +172,29 @@
 			</button>
 		</form>
 
-		<section class="preview-wrap" aria-label={t('theme.preview')}>
+		<section class="preview-wrap stack" aria-label={t('theme.preview')}>
 			<h2>{t('theme.preview')}</h2>
-			<div class="preview" bind:this={preview}>
-				<div class="bar">{data.tenant.name}</div>
-				<div class="body stack">
-					<p>
-						{t('theme.preview_text')}
-						<a href="#preview-link" onclick={(e) => e.preventDefault()}>{t('theme.preview_link')}</a
-						>
-					</p>
-					<div class="row">
-						<button class="btn btn-primary" type="button">{t('theme.preview_button')}</button>
-						<span class="badge">{t('theme.preview_badge')}</span>
+			{#each MODES as mode (mode)}
+				<div>
+					<h3>{t(mode === 'light' ? 'theme.preview_light' : 'theme.preview_dark')}</h3>
+					<div class="preview" bind:this={previews[mode]}>
+						<div class="bar">{data.tenant.name}</div>
+						<div class="body stack">
+							<p>
+								{t('theme.preview_text')}
+								<a href="#preview-{mode}" onclick={(e) => e.preventDefault()}
+									>{t('theme.preview_link')}</a
+								>
+							</p>
+							<div class="row">
+								<button class="btn btn-primary" type="button">{t('theme.preview_button')}</button>
+								<span class="badge">{t('theme.preview_badge')}</span>
+							</div>
+							<input aria-label={t('theme.preview_input')} placeholder={t('theme.preview_input')} />
+						</div>
 					</div>
-					<input aria-label={t('theme.preview_input')} placeholder={t('theme.preview_input')} />
 				</div>
-			</div>
+			{/each}
 		</section>
 	</div>
 
@@ -241,8 +243,16 @@
 		font-size: 1.1rem;
 	}
 
+	.preview-wrap h3 {
+		margin: 0 0 calc(var(--ra-space-unit) / 2);
+		font-size: 0.95rem;
+		color: var(--ra-text-muted);
+	}
+
 	.preview {
 		overflow: hidden;
+		background: var(--ra-surface);
+		color: var(--ra-text);
 		border: 1px solid var(--ra-border);
 		border-radius: var(--ra-radius);
 		font-family: var(--ra-font-family);

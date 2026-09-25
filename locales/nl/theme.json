@@ -33,5 +33,7 @@
   "preview_input": "Invoerveld",
   "contrast_light_ok": "Op lichte pagina's zijn links goed leesbaar (contrast {ratio}:1).",
   "contrast_dark_ok": "Op donkere pagina's ook (contrast {ratio}:1).",
-  "contrast_dark_adjusted": "Op donkere pagina's is deze kleur slecht leesbaar, daar wordt automatisch {color} gebruikt (contrast {ratio}:1)."
+  "contrast_dark_adjusted": "Op donkere pagina's is deze kleur slecht leesbaar, daar wordt automatisch {color} gebruikt (contrast {ratio}:1).",
+  "preview_light": "Lichte modus",
+  "preview_dark": "Donkere modus"
 }

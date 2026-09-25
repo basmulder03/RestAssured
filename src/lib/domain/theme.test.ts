@@ -9,6 +9,7 @@ import {
 	LIGHT_SURFACE,
 	linkColors,
 	readableOn,
+	SURFACES,
 	DEFAULT_THEME,
 	themeCss,
 	themeProblems,
@@ -83,7 +84,8 @@ describe('link colours per surface', () => {
 		const { light, dark } = linkColors(DEFAULT_THEME);
 		expect(css).toContain(`--ra-link-light: ${light};`);
 		expect(css).toContain(`--ra-link-dark: ${dark};`);
-		expect(css).toContain(`--ra-surface: ${LIGHT_SURFACE};`);
-		expect(css).toContain(`--ra-surface: ${DARK_SURFACE};`);
+		for (const mode of Object.values(SURFACES)) {
+			for (const [name, value] of Object.entries(mode)) expect(css).toContain(`${name}: ${value};`);
+		}
 	});
 });
