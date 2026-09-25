@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // Display helpers for assets. Enum values are never shown raw (ADR-0007).
-import type { Translate } from './index';
-import { memberName } from './labels';
+import type { Translate } from '$lib/i18n';
+import { memberName } from '$lib/i18n/labels';
 
 export const ASSET_STATUS_KEYS: Record<string, string> = {
 	active: 'assets.status.active',

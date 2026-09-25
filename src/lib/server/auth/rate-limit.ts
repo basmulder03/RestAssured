@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { sql, type Kysely } from 'kysely';
-import type { DB } from '../db/schema';
-import { sha256Hex } from './secrets';
+import type { DB } from '$lib/server/db/schema';
+import { sha256Hex } from '$lib/server/auth/secrets';
 
 export type RateLimit = { limit: number; windowSeconds: number };
 

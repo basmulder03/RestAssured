@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { sql, type Kysely } from 'kysely';
-import type { DB } from '../db/schema';
-import { hashSecret, newSecret } from './secrets';
+import type { DB } from '$lib/server/db/schema';
+import { hashSecret, newSecret } from '$lib/server/auth/secrets';
 
 // ADR-0004: idle timeout 14 days, absolute lifetime 60 days.
 export const SESSION_IDLE_DAYS = 14;

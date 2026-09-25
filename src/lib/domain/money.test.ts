@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { describe, expect, it } from 'vitest';
-import { formatMoney, moneyInputValue, parseMoney, parseYear } from './money';
+import { formatMoney, moneyInputValue, parseMoney, parseYear } from '$lib/domain/money';
 
 describe('parseMoney', () => {
 	it.each([

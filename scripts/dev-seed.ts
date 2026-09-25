@@ -2,21 +2,21 @@
 // Local development only: known accounts and demo data, so you can sign in and click around.
 // Refuses to run against anything but a database on this machine. Idempotent: re-running
 // resets the demo passwords and leaves existing data alone.
-import { assignAsset, createAsset, type AssetInput } from '../src/lib/server/assets';
-import { acceptInvite } from '../src/lib/server/auth/links';
-import { hashPassword } from '../src/lib/server/auth/password';
-import { createDb } from '../src/lib/server/db/index';
-import { withTenant } from '../src/lib/server/db/tenant';
-import { createLocation, listCategories } from '../src/lib/server/inventory';
+import { assignAsset, createAsset, type AssetInput } from '$lib/server/assets';
+import { acceptInvite } from '$lib/server/auth/links';
+import { hashPassword } from '$lib/server/auth/password';
+import { createDb } from '$lib/server/db';
+import { withTenant } from '$lib/server/db/tenant';
+import { createLocation, listCategories } from '$lib/server/inventory';
 import {
 	createMember,
 	inviteMember,
 	listRoles,
 	setMemberRoles,
 	type Actor
-} from '../src/lib/server/members';
-import { createSuperAdmin, provisionTenant } from '../src/lib/server/platform';
-import { resolveTenantContext } from '../src/lib/server/tenancy';
+} from '$lib/server/members';
+import { createSuperAdmin, provisionTenant } from '$lib/server/platform';
+import { resolveTenantContext } from '$lib/server/tenancy';
 import { loadDotEnv } from './env';
 
 export const DEV_PASSWORD = 'restassured-dev';

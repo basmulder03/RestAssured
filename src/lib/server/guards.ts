@@ -2,9 +2,9 @@
 // Route guards. Call them in every load *and* every form action: SvelteKit runs actions before
 // layout loads, so a layout-level check alone doesn't protect actions (ADR-0003).
 import { error, redirect, type Cookies } from '@sveltejs/kit';
-import type { Permission } from '../domain/permissions';
-import { sessionCookieName } from './auth/sessions';
-import type { TenantContext } from './tenancy';
+import type { Permission } from '$lib/domain/permissions';
+import { sessionCookieName } from '$lib/server/auth/sessions';
+import type { TenantContext } from '$lib/server/tenancy';
 
 export function requireUser(locals: App.Locals, url: URL) {
 	if (!locals.user) redirect(303, `/login?next=${encodeURIComponent(url.pathname + url.search)}`);

@@ -2,10 +2,10 @@
 // Shared setup for integration tests: clubs with a signed-up admin, managers with roles.
 import { randomUUID } from 'node:crypto';
 import type { Kysely } from 'kysely';
-import type { Permission } from '../../src/lib/domain/permissions';
-import { acceptInvite } from '../../src/lib/server/auth/links';
-import type { DB } from '../../src/lib/server/db/schema';
-import { withTenant } from '../../src/lib/server/db/tenant';
+import type { Permission } from '$lib/domain/permissions';
+import { acceptInvite } from '$lib/server/auth/links';
+import type { DB } from '$lib/server/db/schema';
+import { withTenant } from '$lib/server/db/tenant';
 import {
 	createMember,
 	inviteMember,
@@ -13,9 +13,9 @@ import {
 	setMemberRoles,
 	type Actor,
 	type MemberInput
-} from '../../src/lib/server/members';
-import { provisionTenant } from '../../src/lib/server/platform';
-import { resolveTenantContext } from '../../src/lib/server/tenancy';
+} from '$lib/server/members';
+import { provisionTenant } from '$lib/server/platform';
+import { resolveTenantContext } from '$lib/server/tenancy';
 
 /** `db` is a getter because connections are opened in beforeAll. */
 export function helpers(db: () => Kysely<DB>) {

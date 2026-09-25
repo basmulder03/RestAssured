@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-import type { Translate } from './index';
+import type { Translate } from '$lib/i18n';
 
 /**
  * ADR-0007 §5: system entities carry a `label_key`; renamed or club-defined ones carry

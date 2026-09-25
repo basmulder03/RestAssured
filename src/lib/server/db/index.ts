@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { Kysely, PostgresDialect } from 'kysely';
 import pg from 'pg';
-import type { DB } from './schema';
+import type { DB } from '$lib/server/db/schema';
 
 export type { DB };
 

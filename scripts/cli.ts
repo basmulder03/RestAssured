@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // Operator commands. Development: `pnpm cli <command>`. Production: `node build/cli.js <command>`.
 import { parseArgs } from 'node:util';
-import { bootstrapDatabase } from '../src/lib/server/db/bootstrap';
-import { createDb } from '../src/lib/server/db/index';
-import { migrate } from '../src/lib/server/db/migrate';
-import { createSuperAdmin } from '../src/lib/server/platform';
+import { bootstrapDatabase } from '$lib/server/db/bootstrap';
+import { createDb } from '$lib/server/db';
+import { migrate } from '$lib/server/db/migrate';
+import { createSuperAdmin } from '$lib/server/platform';
 import { loadDotEnv } from './env';
 
 const USAGE = `Usage: cli <command>

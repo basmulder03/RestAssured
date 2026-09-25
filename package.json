@@ -8,6 +8,7 @@
     "node": ">=26"
   },
   "scripts": {
+    "prepare": "svelte-kit sync || echo ''",
     "dev": "vite dev",
     "dev:seed": "tsx scripts/dev-seed.ts",
     "build": "vite build && pnpm build:cli",

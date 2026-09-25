@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // ADR-0005/0017: audit entries hold ids and field *names*; never personal data values.
 import type { Kysely } from 'kysely';
-import type { DB } from './db/schema';
+import type { DB } from '$lib/server/db/schema';
 
 type Entry = {
 	action: string;

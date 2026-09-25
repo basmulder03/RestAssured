@@ -2,10 +2,10 @@
 // Asset categories and storage locations of a club.
 import { sql, type Kysely } from 'kysely';
 import * as v from 'valibot';
-import { act, assertId, read, type Actor } from './actor';
-import { auditTenant } from './audit';
-import type { DB } from './db/schema';
-import { DomainError } from './errors';
+import { act, assertId, read, type Actor } from '$lib/server/actor';
+import { auditTenant } from '$lib/server/audit';
+import type { DB } from '$lib/server/db/schema';
+import { DomainError } from '$lib/server/errors';
 
 export const CATEGORY_KINDS = ['instrument', 'clothing', 'accessory', 'case'] as const;
 export type CategoryKind = (typeof CATEGORY_KINDS)[number];

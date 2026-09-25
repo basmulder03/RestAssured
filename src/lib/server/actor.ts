@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // The acting user within a verified club context, and the checks every service call makes.
 import type { Kysely, Transaction } from 'kysely';
-import type { Permission } from '../domain/permissions';
-import type { DB } from './db/schema';
-import { withTenant } from './db/tenant';
-import { DomainError } from './errors';
-import type { TenantContext } from './tenancy';
+import type { Permission } from '$lib/domain/permissions';
+import type { DB } from '$lib/server/db/schema';
+import { withTenant } from '$lib/server/db/tenant';
+import { DomainError } from '$lib/server/errors';
+import type { TenantContext } from '$lib/server/tenancy';
 
 export type Actor = { userId: string; tenant: TenantContext };
 

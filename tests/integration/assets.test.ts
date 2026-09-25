@@ -14,16 +14,16 @@ import {
 	returnAsset,
 	updateAsset,
 	type AssetInput
-} from '../../src/lib/server/assets';
-import type { DB } from '../../src/lib/server/db/schema';
+} from '$lib/server/assets';
+import type { DB } from '$lib/server/db/schema';
 import {
 	createCategory,
 	createLocation,
 	listCategories,
 	renameCategory,
 	setLocationArchived
-} from '../../src/lib/server/inventory';
-import { createMember, setMemberStatus, type Actor } from '../../src/lib/server/members';
+} from '$lib/server/inventory';
+import { createMember, setMemberStatus, type Actor } from '$lib/server/members';
 import { appUrl, connect } from './db';
 import { helpers } from './helpers';
 

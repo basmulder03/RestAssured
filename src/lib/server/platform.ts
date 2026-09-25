@@ -2,12 +2,12 @@
 // Platform (Super Admin) operations (ADR-0001 §4, ADR-0003, ADR-0018).
 import { sql, type Kysely } from 'kysely';
 import * as v from 'valibot';
-import type { Permission } from '../domain/permissions';
-import { auditPlatform, auditTenant } from './audit';
-import { issueToken } from './auth/tokens';
-import type { DB } from './db/schema';
-import { setTenant } from './db/tenant';
-import { DomainError } from './errors';
+import type { Permission } from '$lib/domain/permissions';
+import { auditPlatform, auditTenant } from '$lib/server/audit';
+import { issueToken } from '$lib/server/auth/tokens';
+import type { DB } from '$lib/server/db/schema';
+import { setTenant } from '$lib/server/db/tenant';
+import { DomainError } from '$lib/server/errors';
 
 /** Editable role templates seeded into every new club (docs/SYSTEM_SPEC.md §3.3). */
 export const ROLE_TEMPLATES: { labelKey: string; permissions: Permission[] }[] = [

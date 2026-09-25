@@ -3,8 +3,8 @@
 // application code forgets a WHERE clause.
 import { sql, type Kysely } from 'kysely';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import type { DB } from '../../src/lib/server/db/schema';
-import { userMemberships, withTenant } from '../../src/lib/server/db/tenant';
+import type { DB } from '$lib/server/db/schema';
+import { userMemberships, withTenant } from '$lib/server/db/tenant';
 import { appUrl, connect, ownerUrl } from './db';
 import { seedTenant, seedUser, type TenantFixture } from './fixtures';
 

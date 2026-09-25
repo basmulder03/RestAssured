@@ -9,10 +9,10 @@ import {
 	permissionDescriptionKey,
 	permissionGroupKey,
 	permissionLabelKey
-} from '../src/lib/domain/permissions';
-import { buildDictionaries, type Dictionary } from '../src/lib/i18n/dictionaries';
-import { messageVariables } from '../src/lib/i18n/format';
-import { DEFAULT_LOCALE, LOCALES } from '../src/lib/i18n/locales';
+} from '$lib/domain/permissions';
+import { buildDictionaries, type Dictionary } from '$lib/i18n/dictionaries';
+import { messageVariables } from '$lib/i18n/format';
+import { DEFAULT_LOCALE, LOCALES } from '$lib/i18n/locales';
 
 const KEY_FORMAT = /^[a-z0-9_]+(\.[a-z0-9_]+)+$/;
 

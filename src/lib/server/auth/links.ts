@@ -2,13 +2,18 @@
 // Consuming one-time links (ADR-0004). Each flow runs in one transaction: lock the token, check,
 // apply, mark consumed, create the session. A failed check leaves the link usable.
 import { sql, type Kysely, type Transaction } from 'kysely';
-import { auditPlatform, auditTenant } from '../audit';
-import type { DB } from '../db/schema';
-import { setTenant, userAdminTenants, userMemberships } from '../db/tenant';
-import { DomainError } from '../errors';
-import { hashPassword, passwordProblem } from './password';
-import { createSession, revokeUserSessions } from './sessions';
-import { findUsableToken, markConsumed, revokeUserTokens, type TokenRow } from './tokens';
+import { auditPlatform, auditTenant } from '$lib/server/audit';
+import type { DB } from '$lib/server/db/schema';
+import { setTenant, userAdminTenants, userMemberships } from '$lib/server/db/tenant';
+import { DomainError } from '$lib/server/errors';
+import { hashPassword, passwordProblem } from '$lib/server/auth/password';
+import { createSession, revokeUserSessions } from '$lib/server/auth/sessions';
+import {
+	findUsableToken,
+	markConsumed,
+	revokeUserTokens,
+	type TokenRow
+} from '$lib/server/auth/tokens';
 
 export type SignedIn = {
 	userId: string;

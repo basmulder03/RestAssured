@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-import { buildDictionaries, type Dictionary } from './dictionaries';
-import { formatMessage, type MessageParams } from './format';
-import { DEFAULT_LOCALE, isLocale, LOCALES, type Locale } from './locales';
+import { buildDictionaries, type Dictionary } from '$lib/i18n/dictionaries';
+import { formatMessage, type MessageParams } from '$lib/i18n/format';
+import { DEFAULT_LOCALE, isLocale, LOCALES, type Locale } from '$lib/i18n/locales';
 
 export {
 	buildDictionaries,

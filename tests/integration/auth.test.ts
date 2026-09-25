@@ -8,20 +8,16 @@ import {
 	consumeMagicLogin,
 	consumePasswordReset,
 	describeInvite
-} from '../../src/lib/server/auth/links';
-import { changePassword, loginWithPassword } from '../../src/lib/server/auth/login';
-import { withinRateLimit } from '../../src/lib/server/auth/rate-limit';
-import { hashSecret } from '../../src/lib/server/auth/secrets';
-import {
-	createSession,
-	revokeUserSessions,
-	validateSession
-} from '../../src/lib/server/auth/sessions';
-import { issueToken } from '../../src/lib/server/auth/tokens';
-import type { DB } from '../../src/lib/server/db/schema';
-import { withTenant } from '../../src/lib/server/db/tenant';
-import { createSuperAdmin, provisionTenant, ROLE_TEMPLATES } from '../../src/lib/server/platform';
-import { resolveTenantContext } from '../../src/lib/server/tenancy';
+} from '$lib/server/auth/links';
+import { changePassword, loginWithPassword } from '$lib/server/auth/login';
+import { withinRateLimit } from '$lib/server/auth/rate-limit';
+import { hashSecret } from '$lib/server/auth/secrets';
+import { createSession, revokeUserSessions, validateSession } from '$lib/server/auth/sessions';
+import { issueToken } from '$lib/server/auth/tokens';
+import type { DB } from '$lib/server/db/schema';
+import { withTenant } from '$lib/server/db/tenant';
+import { createSuperAdmin, provisionTenant, ROLE_TEMPLATES } from '$lib/server/platform';
+import { resolveTenantContext } from '$lib/server/tenancy';
 import { appUrl, connect, ownerUrl } from './db';
 
 let app: Kysely<DB>;
