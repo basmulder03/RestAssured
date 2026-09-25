@@ -1,10 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // Club member management: permissions, ADR-0003 guards, invites and admin-issued links.
-import { randomUUID } from 'node:crypto';
 import type { Kysely } from 'kysely';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import type { Permission } from '../../src/lib/domain/permissions';
-import { acceptInvite } from '../../src/lib/server/auth/links';
 import { hashSecret } from '../../src/lib/server/auth/secrets';
 import type { DB } from '../../src/lib/server/db/schema';
 import { withTenant } from '../../src/lib/server/db/tenant';
@@ -17,13 +14,12 @@ import {
 	listRoles,
 	setMemberRoles,
 	setMemberStatus,
-	updateMember,
-	type Actor,
-	type MemberInput
+	updateMember
 } from '../../src/lib/server/members';
-import { createSuperAdmin, provisionTenant } from '../../src/lib/server/platform';
+import { createSuperAdmin } from '../../src/lib/server/platform';
 import { resolveTenantContext } from '../../src/lib/server/tenancy';
 import { appUrl, connect, ownerUrl } from './db';
+import { helpers } from './helpers';
 
 let app: Kysely<DB>;
 let owner: Kysely<DB>;
@@ -38,67 +34,7 @@ afterAll(async () => {
 	await owner.destroy();
 });
 
-const unique = () => randomUUID().slice(0, 8);
-const member = (displayName: string, email: string | null = null): MemberInput => ({
-	displayName,
-	email,
-	phone: null,
-	memberNumber: null,
-	notes: null
-});
-
-async function actorFor(userId: string, slug: string): Promise<Actor> {
-	const tenant = await resolveTenantContext(app, userId, slug, null);
-	if (!tenant) throw new Error('not a member');
-	return { userId, tenant };
-}
-
-/** A club with its admin signed up; returns the admin as an Actor. */
-async function club() {
-	const slug = `club-${unique()}`;
-	const { tenantId, invite } = await provisionTenant(
-		app,
-		{
-			slug,
-			name: slug,
-			defaultLocale: 'nl',
-			adminName: 'Admin',
-			adminEmail: `admin-${unique()}@example.org`
-		},
-		null
-	);
-	const { userId } = await acceptInvite(app, invite.secret, null);
-	return { slug, tenantId, admin: await actorFor(userId, slug) };
-}
-
-/** Adds a member, gives them an account, and grants the given role ids. */
-async function manager(admin: Actor, roleIds: string[]) {
-	const id = await createMember(app, admin, member('Manager', `mgr-${unique()}@example.org`));
-	const invite = await inviteMember(app, admin, id);
-	const { userId } = await acceptInvite(app, invite.secret, null);
-	if (roleIds.length) await setMemberRoles(app, admin, id, roleIds);
-	return { membershipId: id, userId, actor: await actorFor(userId, admin.tenant.slug) };
-}
-
-async function customRole(tenantId: string, permissions: Permission[]): Promise<string> {
-	return withTenant(app, tenantId, async (trx) => {
-		const { id } = await trx
-			.insertInto('roles')
-			.values({ tenant_id: tenantId, label_i18n: JSON.stringify({ nl: 'Eigen', en: 'Custom' }) })
-			.returning('id')
-			.executeTakeFirstOrThrow();
-		if (permissions.length) {
-			await trx
-				.insertInto('role_permissions')
-				.values(permissions.map((p) => ({ tenant_id: tenantId, role_id: id, permission_code: p })))
-				.execute();
-		}
-		return id;
-	});
-}
-
-const roleByKey = async (admin: Actor, key: string) =>
-	(await listRoles(app, admin)).find((r) => r.labelKey === key)!.id;
+const { unique, member, actorFor, club, manager, customRole, roleByKey } = helpers(() => app);
 
 describe('members', () => {
 	it('creates reference members with only a name, and audits field names but no values', async () => {

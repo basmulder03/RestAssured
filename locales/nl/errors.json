@@ -11,5 +11,7 @@
   "password.too_short": "Een wachtwoord moet minstens 12 tekens lang zijn.",
   "password.too_long": "Een wachtwoord mag maximaal 256 tekens lang zijn.",
   "password.contains_email": "Gebruik je e-mailadres niet in je wachtwoord.",
-  "password.mismatch": "De wachtwoorden komen niet overeen."
+  "password.mismatch": "De wachtwoorden komen niet overeen.",
+  "money_invalid": "Vul een bedrag in, bijvoorbeeld 1.250 of 1250,00.",
+  "year_invalid": "Vul een jaartal in van vier cijfers."
 }

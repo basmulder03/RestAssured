@@ -11,5 +11,7 @@
   "password.too_short": "A password must be at least 12 characters long.",
   "password.too_long": "A password can be at most 256 characters long.",
   "password.contains_email": "Don't use your email address in your password.",
-  "password.mismatch": "The passwords don't match."
+  "password.mismatch": "The passwords don't match.",
+  "money_invalid": "Enter an amount, for example 1250 or 1,250.00.",
+  "year_invalid": "Enter a four-digit year."
 }

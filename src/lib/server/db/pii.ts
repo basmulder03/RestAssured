@@ -41,5 +41,41 @@ export const PII_TABLES = {
 			'created_at',
 			'updated_at'
 		]
+	},
+	assets: {
+		pii: { description: 'free_text' },
+		notPii: [
+			'tenant_id',
+			'id',
+			'category_id',
+			'tag',
+			'brand',
+			'model',
+			'serial_number',
+			'purchase_price_cents',
+			'purchase_year',
+			'insured_value_cents',
+			'insured_value_year',
+			'ownership',
+			'owner_membership_id',
+			'status',
+			'lifespan_years',
+			'created_at',
+			'updated_at'
+		]
+	},
+	assignments: {
+		pii: { condition_out: 'free_text', condition_in: 'free_text', notes: 'free_text' },
+		notPii: [
+			'tenant_id',
+			'id',
+			'asset_id',
+			'membership_id',
+			'location_id',
+			'checked_out_at',
+			'returned_at',
+			'issued_by_membership_id',
+			'returned_by_membership_id'
+		]
 	}
 } as const satisfies Record<string, Classification>;

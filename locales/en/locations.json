@@ -1,0 +1,4 @@
+{
+  "errors.name_taken": "There is already a location called \"{name}\".",
+  "errors.in_use": "There are still assets at this location. Move them first."
+}

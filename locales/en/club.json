@@ -1,7 +1,12 @@
 {
   "suspended": "This club is suspended. You can view data but not change it.",
-  "dashboard_placeholder": "The inventory overview will appear here soon.",
   "nav_label": "Club",
   "overview": "Overview",
-  "errors.not_writable": "This club is suspended; changes are not possible."
+  "errors.not_writable": "This club is suspended; changes are not possible.",
+  "stats.current": "assets",
+  "stats.on_loan": "lent out",
+  "stats.in_repair": "in repair",
+  "stats.unplaced": "without a known place",
+  "to_assets": "Go to assets",
+  "no_asset_access": "You don't have access to the asset overview."
 }

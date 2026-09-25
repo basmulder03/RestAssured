@@ -55,5 +55,7 @@
   "errors.no_account": "Dit lid heeft geen account.",
   "errors.platform_account": "Voor dit account kunnen alleen platformbeheerders links maken.",
   "errors.admin_role_only": "Alleen een beheerder kan de beheerdersrol toekennen of intrekken.",
-  "errors.escalation": "Je kunt geen rol toekennen met rechten die je zelf niet hebt."
+  "errors.escalation": "Je kunt geen rol toekennen met rechten die je zelf niet hebt.",
+  "on_loan": "In bruikleen",
+  "on_loan_none": "Dit lid heeft niets in bruikleen."
 }

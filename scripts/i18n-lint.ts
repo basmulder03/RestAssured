@@ -56,7 +56,11 @@ const used = new Set<string>([
 	...PERMISSIONS.flatMap((p) => [permissionLabelKey(p.code), permissionDescriptionKey(p.code)]),
 	...PERMISSION_GROUPS.map(permissionGroupKey)
 ]);
-const codeFiles = walk('src', (f) => /\.(ts|svelte)$/.test(f) && !/\.test\.ts$/.test(f));
+// Migrations count too: default data (e.g. category label keys) is seeded in SQL.
+const codeFiles = [
+	...walk('src', (f) => /\.(ts|svelte)$/.test(f) && !/\.test\.ts$/.test(f)),
+	...walk('db/migrations', (f) => f.endsWith('.sql'))
+];
 for (const file of codeFiles) {
 	const code = readFileSync(file, 'utf8');
 	for (const m of code.matchAll(/['"`]([a-z0-9_]+(?:\.[a-z0-9_]+)+)['"`]/g)) {

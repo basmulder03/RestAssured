@@ -117,6 +117,7 @@ export async function provisionTenant(
 		await setTenant(trx, tenantId);
 
 		await trx.insertInto('theme_settings').values({ tenant_id: tenantId }).execute();
+		await sql`SELECT ra_seed_default_categories()`.execute(trx);
 		const { id: adminRoleId } = await trx
 			.insertInto('roles')
 			.values({ tenant_id: tenantId, label_key: TENANT_ADMIN_ROLE_KEY, is_system: true })

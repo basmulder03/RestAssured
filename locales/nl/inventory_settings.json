@@ -1,0 +1,19 @@
+{
+  "title": "Categorieën en locaties",
+  "nav": "Instellingen",
+  "categories": "Categorieën",
+  "categories_intro": "Pas de namen aan zoals jullie ze gebruiken, of voeg eigen categorieën toe.",
+  "locations": "Locaties",
+  "locations_intro": "Waar materiaal wordt opgeborgen, bijvoorbeeld het repetitielokaal of het depot.",
+  "archived": "gearchiveerd",
+  "restore": "Terugzetten",
+  "archive": "Archiveren",
+  "name_nl": "Naam (Nederlands)",
+  "name_en": "Naam (Engels)",
+  "kind": "Soort",
+  "new_category": "Nieuwe categorie",
+  "add": "Toevoegen",
+  "new_location": "Nieuwe locatie",
+  "location_name": "Naam",
+  "saved": "Opgeslagen."
+}

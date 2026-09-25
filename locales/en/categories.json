@@ -1,0 +1,16 @@
+{
+  "brass": "Brass",
+  "woodwind": "Woodwind",
+  "saxophones": "Saxophones",
+  "percussion": "Percussion",
+  "other_instruments": "Other instruments",
+  "uniforms": "Uniforms",
+  "uniform_accessories": "Uniform accessories",
+  "music_stands": "Music stands",
+  "accessories": "Accessories",
+  "cases": "Cases",
+  "kind.instrument": "Instrument",
+  "kind.clothing": "Clothing",
+  "kind.accessory": "Accessory",
+  "kind.case": "Case"
+}

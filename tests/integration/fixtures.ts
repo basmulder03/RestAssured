@@ -41,6 +41,25 @@ export async function seedTenant(
 		.values({ tenant_id: tenantId, membership_id: membershipId, role_id: roleId })
 		.execute();
 	await owner.insertInto('theme_settings').values({ tenant_id: tenantId }).execute();
+	const { id: categoryId } = await owner
+		.insertInto('asset_categories')
+		.values({ tenant_id: tenantId, kind: 'instrument', label_key: 'categories.brass' })
+		.returning('id')
+		.executeTakeFirstOrThrow();
+	const { id: locationId } = await owner
+		.insertInto('locations')
+		.values({ tenant_id: tenantId, name: 'Depot' })
+		.returning('id')
+		.executeTakeFirstOrThrow();
+	const { id: assetId } = await owner
+		.insertInto('assets')
+		.values({ tenant_id: tenantId, category_id: categoryId, brand: 'Yamaha' })
+		.returning('id')
+		.executeTakeFirstOrThrow();
+	await owner
+		.insertInto('assignments')
+		.values({ tenant_id: tenantId, asset_id: assetId, location_id: locationId })
+		.execute();
 	await owner
 		.insertInto('audit_log')
 		.values({ tenant_id: tenantId, action: 'tenant.created', subject_type: 'tenant' })
